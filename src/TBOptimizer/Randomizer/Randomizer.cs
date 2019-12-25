@@ -10,20 +10,20 @@ namespace Trailblazer.TBOptimizer.Randomizer
         where TEvaluation : IComparable<TEvaluation>
     {
         private readonly IComparer<TEvaluation> evaluationComparer;
-        private readonly int numRepeats;
+        private readonly int numRandomizations;
 
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker, int numRepeats)
+        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker, int numRandomizations)
             : base (successorPicker)
         {
             this.evaluationComparer = evaluationComparer;
-            this.numRepeats = numRepeats;
+            this.numRandomizations = numRandomizations;
         }
 
         public override TState PerformOptimization(TState initialState)
         {
             TState bestState = initialState;
             TState nextState;
-            for (int i = 0; i < numRepeats; i++)
+            for (int i = 0; i < numRandomizations; i++)
             {
                 nextState = successorPicker.Next(bestState);
                 bestState = evaluationComparer.Compare(bestState.GetEvaluation(), nextState.GetEvaluation()) > 0
