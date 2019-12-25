@@ -52,6 +52,8 @@ jobs:
             dotnet.exe test -r ~/test-results
       - store_test_results:
           path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results
   
   package_deploy_optimizer:
     executor:
