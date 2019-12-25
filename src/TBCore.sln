@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBUtils", "TBUtils\TBUtils.csproj", "{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\TBOptimizer.csproj", "{420C0A6C-D6C4-4807-9A29-05EDE74B1251}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{69FFD294-7F44-49C6-9667-C8F51268BD7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Release|anycpu.Build.0 = Release|Any CPU
+		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.Build.0 = Release|Any CPU
+		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

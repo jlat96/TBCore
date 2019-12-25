@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Optimizer\obj\Optimizer.csproj.nuget.g.targets" />
+    <None Remove="Optimizer\obj\Optimizer.csproj.nuget.dgspec.json" />
+    <None Remove="Optimizer\obj\Optimizer.csproj.nuget.cache" />
+    <None Remove="Optimizer\obj\Optimizer.csproj.nuget.g.props" />
+    <None Remove="Optimizer\obj\project.assets.json" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.csprojAssemblyReference.cache" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.dll" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.csproj.FileListAbsolute.txt" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.assets.cache" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.pdb" />
+    <None Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.csproj.CopyComplete" />
+    <None Remove="Optimizer\bin\Debug\netcoreapp3.0\Optimizer.dll" />
+    <None Remove="Optimizer\bin\Debug\netcoreapp3.0\Optimizer.deps.json" />
+    <None Remove="Optimizer\bin\Debug\netcoreapp3.0\Optimizer.pdb" />
+    <None Remove="Optimizer\bin\Debug\netcoreapp3.0\TBUtils.pdb" />
+    <None Remove="Optimizer\bin\Debug\netcoreapp3.0\TBUtils.dll" />
+    <None Remove="Optimizer\Optimizer.csproj" />
+    <None Remove=".DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TBUtils\TBUtils.csproj" />
+  </ItemGroup>
+</Project>
