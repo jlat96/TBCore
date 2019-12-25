@@ -93,12 +93,12 @@ workflows:
       - unit-test:
           requires:
             - checkout-workspace
-      - package_deploy_optimizer:
-          requires:
-            - unit-test
-          filters:
-            branches:
-              only:
-                - master
+      # - package_deploy_optimizer:
+      #     requires:
+      #       - unit-test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
     
 
