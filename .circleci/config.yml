@@ -49,7 +49,8 @@ jobs:
           name: "Run unit tests for all projects"
           command: |
             cd tb_workspace\repo\src
-            dotnet.exe test -xml ~/test-results/results.xml
+            dotnet.exe test -r ~/test-results
+            dir ~/test-results
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
