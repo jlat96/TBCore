@@ -50,6 +50,9 @@ jobs:
           command: |
             cd tb_workspace\repo\src
             dotnet.exe test
+      - run:
+          name: "Store Test Results"
+          command: mkdir test-results
       - store_test_results:
           path: test-results
   
