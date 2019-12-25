@@ -18,8 +18,8 @@ jobs:
       - run:
           name: "Restore nuget packages"
           command: |
-          cd src
-          dotnet.exe restore
+            cd src
+            dotnet.exe restore
       - persist_to_workspace:
           root: ../../tb_workspace
           paths: repo
