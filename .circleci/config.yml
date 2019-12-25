@@ -81,24 +81,24 @@ jobs:
 
 workflows:
   version: 2
-  # commit:
-  #   jobs:
-  #     - checkout-workspace
-  #     - unit-test:
-  #         requires:
-  #           - checkout-workspace
+  commit:
+    jobs:
+      - checkout-workspace
+      - unit-test:
+          requires:
+            - checkout-workspace
   nuget-deploy-optimizer:
     jobs:
       - checkout-workspace
       - unit-test:
           requires:
             - checkout-workspace
-      # - package_deploy_optimizer:
-      #     requires:
-      #       - unit-test
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
+      - package_deploy_optimizer:
+          requires:
+            - unit-test
+          filters:
+            branches:
+              only:
+                - master
     
 
