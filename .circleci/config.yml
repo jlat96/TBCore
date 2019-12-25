@@ -70,24 +70,9 @@ jobs:
       - store_artifacts: 
           path: C:\Users\circleci\project\tb_workspace\repo\nupkg\optimizer\Optimizer.0.0.1.nupkg
 
-  deploy_optimizer:
-    executor:
-      name: win/vs2019
-      shell: powershell.exe
-    steps:
-      - run:
-          name: "Deploy Optimizer"
-          command: echo "TEST"
-
 workflows:
   version: 2
-  commit:
-    jobs:
-      - checkout-workspace
-      - unit-test:
-          requires:
-            - checkout-workspace
-  nuget-deploy-optimizer:
+  test-deploy-optimizer:
     jobs:
       - checkout-workspace
       - unit-test:
