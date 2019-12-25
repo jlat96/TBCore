@@ -48,14 +48,11 @@ jobs:
       - run:
           name: "Run unit tests for all projects"
           command: |
-            cd tb_workspace\repo\src
-            mkdir ~/test-results
-            dotnet.exe test -r ~/test-results
-            dir ~/test-results
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results
+            dotnet.exe test
+      # - store_test_results:
+      #     path: ~/test-results
+      # - store_artifacts:
+      #     path: ~/test-results
   
   package_deploy_optimizer:
     executor:
