@@ -1,0 +1,104 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+environment:
+  GH_USER: "jlat96"
+  VERSION: 0.0.1.${CIRCLE_BUILD_NUMBER} 
+
+jobs:
+  checkout-workspace:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    working_directory: tb_workspace\repo
+    steps:    
+      - checkout
+      - run:
+          name: "Restore nuget packages"
+          command: |
+          cd src
+          dotnet.exe restore
+      - persist_to_workspace:
+          root: ../../tb_workspace
+          paths: repo
+
+  build:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - attach_workspace:
+          at: tb_workspace
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Build"
+          command: dotnet.exe build -p:Version=$VERSION
+      
+  unit-test:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - attach_workspace:
+            at: tb_workspace
+      - run:
+          name: "Run unit tests for all projects"
+          command: |
+            cd tb_workspace\repo\src
+            dotnet.exe test
+      - store_test_results:
+          path: test-results
+  
+  package_deploy_optimizer:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    environment:
+      VERSION: 0.0.1.0
+    steps:
+      - attach_workspace:
+            at: tb_workspace
+      - run:
+            name: "Package Optimizer"
+            command: |
+              cd tb_workspace\repo\src
+              dotnet.exe pack Optimizer\Optimizer.csproj -o nupkg\optimizer -p:PackageVersion=0.0.1.0
+      - store_artifacts: 
+          path: C:\Users\circleci\project\tb_workspace\repo\nupkg\optimizer\Optimizer.0.0.1.nupkg
+
+  deploy_optimizer:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - run:
+          name: "Deploy Optimizer"
+          command: echo "TEST"
+
+workflows:
+  version: 2
+  # commit:
+  #   jobs:
+  #     - checkout-workspace
+  #     - unit-test:
+  #         requires:
+  #           - checkout-workspace
+  nuget-deploy-optimizer:
+    jobs:
+      - checkout-workspace
+      - unit-test:
+          requires:
+            - checkout-workspace
+      - package_deploy_optimizer:
+          requires:
+            - unit-test
+          filters:
+            branches:
+              only:
+                - master
+    
+
