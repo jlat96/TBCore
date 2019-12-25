@@ -1,5 +1,7 @@
 # TrailBlazer for .NET Core
 
+[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg)](https://circleci.com/gh/jlat96/TBCore/tree/master)
+
 ## Introduction
 
 TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful set of path finding tools to easily implement path finding and local search into their applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope and scale can make use of efficient tools without each project requiring a complex independent implementation.
