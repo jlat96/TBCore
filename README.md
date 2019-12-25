@@ -1,6 +1,6 @@
 # TrailBlazer for .NET Core
 
-[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg)](https://circleci.com/gh/jlat96/TBCore/tree/master)
+[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg&circle-token=a7d863cfb0fe6c6023a12dbf4aa8eca916c52f3b)](https://circleci.com/gh/jlat96/TBCore/tree/master)
 
 ## Introduction
 
