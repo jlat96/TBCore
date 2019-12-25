@@ -49,6 +49,7 @@ jobs:
           name: "Run unit tests for all projects"
           command: |
             cd tb_workspace\repo\src
+            mkdir ~/test-results
             dotnet.exe test -r ~/test-results
             dir ~/test-results
       - store_test_results:
