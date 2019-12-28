@@ -20,47 +20,53 @@ namespace TrailBlazer.TBOptimizer.Climber
     {
         private readonly uint numRestarts;
         private readonly ParallelOptions parallelOptions;
+        private readonly ISuccessorPicker<TState, TEvaluation> stateRandomizer;
 
         /// <summary>
         /// Creates a RandomRestartHillClimber that will restart the Optimization from the given ClimberAlgorithm
         /// up to numRestarts in serial (one thread)
         /// </summary>
+        /// <param name="stateRandomizer">A successor picker that will generate a random successor state from the initial state</param>
         /// <param name="algorithm">The climber algorithm to use for optimzation</param>
         /// <param name="numRestarts">The number of random restart operations to complete</param>
-        public RandomRestartHillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts)
-            : this(algorithm, numRestarts, false) { }
+        public RandomRestartHillClimber(ISuccessorPicker<TState, TEvaluation> stateRandomizer, ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts)
+            : this(stateRandomizer, algorithm, numRestarts, false) { }
 
         /// <summary>
         /// Creates a RandomRestartHillClimber that will restart the Optimization from the given ClimberAlgorithm
         /// up to numRestarts. If parallel is true, the operation will be completed with all available processors
         /// </summary>
+        /// <param name="stateRandomizer">A successor picker that will generate a random successor state from the initial state</param>
         /// <param name="algorithm">The climber algorithm to use for optimzation</param>
         /// <param name="numRestarts">The number of random restart operations to complete</param>
         /// <param name="parallel">Flag to determine if the process should run in parallel</param>
-        public RandomRestartHillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, bool parallel)
-            : this(algorithm, numRestarts, parallel ? -1 : 1) { }
+        public RandomRestartHillClimber(ISuccessorPicker<TState, TEvaluation> stateRandomizer, ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, bool parallel)
+            : this(stateRandomizer, algorithm, numRestarts, parallel ? -1 : 1) { }
 
         /// <summary>
         /// Creates a RandomRestartHillClimber that will restart the Optimization from the given ClimberAlgorithm
         /// up to numRestarts. The operation will run in parallel with as many available processors up to maxDegreeOfParallelism.
         /// </summary>
+        /// <param name="stateRandomizer">A successor picker that will generate a random successor state from the initial state</param>
         /// <param name="algorithm">The climber algorithm to use for optimzation</param>
         /// <param name="numRestarts">The number of random restart operations to complete</param>
         /// <param name="maxDegreeOfParallelism">The maximum number of processors that will attempt to perform an optimization operation</param>
-        public RandomRestartHillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, int maxDegreeOfParallelism)
-            : this(algorithm, numRestarts, new ParallelOptions() { MaxDegreeOfParallelism = maxDegreeOfParallelism }) { }
+        public RandomRestartHillClimber(ISuccessorPicker<TState, TEvaluation> stateRandomizer, ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, int maxDegreeOfParallelism)
+            : this(stateRandomizer, algorithm, numRestarts, new ParallelOptions() { MaxDegreeOfParallelism = maxDegreeOfParallelism }) { }
 
         /// <summary>
         /// Creates a RandomRestartHillClimber that will restart the Optimization from the given ClimberAlgorithm
         /// up to numRestarts in parallel with the given ParallelOptions
         /// </summary>
+        /// <param name="stateRandomizer">A successor picker that will generate a random successor state from the initial state</param>
         /// <param name="algorithm">The climber algorithm to use for optimzation</param>
         /// <param name="numRestarts">The number of random restart operations to complete</param>
         /// <param name="parallelOptions">The options for the Parallel restart operations</param>
-        public RandomRestartHillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, ParallelOptions parallelOptions) : base (algorithm)
+        public RandomRestartHillClimber(ISuccessorPicker<TState, TEvaluation> stateRandomizer, ClimberAlgorithm<TState, TEvaluation> algorithm, uint numRestarts, ParallelOptions parallelOptions) : base (algorithm)
         {
             this.numRestarts = numRestarts;
             this.parallelOptions = parallelOptions;
+            this.stateRandomizer = stateRandomizer;
         }
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace TrailBlazer.TBOptimizer.Climber
         {
             List<TState> winnerStates = new List<TState>();
             Parallel.For(0, numRestarts - 1, parallelOptions, i => {
-                TState localWinner = base.PerformOptimization(initialState); // TODO: Randomize initial state
+                TState localWinner = base.PerformOptimization(stateRandomizer.Next(initialState));
                 lock (winnerStates)
                 {
                     winnerStates.Add(localWinner);
