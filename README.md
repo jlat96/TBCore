@@ -2,12 +2,12 @@
 
 ## Status
 
-|[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg&circle-token=a7d863cfb0fe6c6023a12dbf4aa8eca916c52f3b)](https://circleci.com/gh/jlat96/TBCore/tree/master) |![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)|
+[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg&circle-token=a7d863cfb0fe6c6023a12dbf4aa8eca916c52f3b)](https://circleci.com/gh/jlat96/TBCore/tree/master) ![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
 
 |Release|Version|
 |-------|-------|
 |Latest stable|![GH_Release](https://img.shields.io/github/v/release/jlat96/TBCore)|
-|Pre-release|!GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
+|Pre-release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
 
 
 
