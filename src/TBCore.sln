@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{69FFD294-7F44-49C6-9667-C8F51268BD7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerDemo_PokerSquares", "TBOptimizerDemo_PokerSquares\TBOptimizerDemo_PokerSquares.csproj", "{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -25,5 +27,9 @@ Global
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.Build.0 = Release|Any CPU
+		{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
