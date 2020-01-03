@@ -17,10 +17,10 @@ TrailBlazer is a path finding and artificial intelligence library for .NET. Our 
 
 ## Getting Started
 
-|Project  |Download                                                            |
-|---------|--------------------------------------------------------------------|
-|Optimizer|Comning soon!                                                       |
-|Source   |![GH_Release](https://img.shields.io/github/v/release/jlat96/TBCore)|
+|Project  |Download                                  |
+|---------|------------------------------------------|
+|Optimizer|Comning soon!                             |
+|Source   |https://github.com/jlat96/TBCore/releases |
 
 ## Package Contents
 
