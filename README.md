@@ -34,7 +34,7 @@ Optimizer aims to provide tools to maximize or minimize configurations of states
 
 ```HillClimber``` implements a versions of the [Hill Climbing Local Search Algorithm](https://en.wikipedia.org/wiki/Hill_climbing).
 
-*To Set Up a Hill Climber:*
+**To Set Up a Hill Climber:**
 
 * Set up a state system
   1. Create a state class that can calculate a utility score that extends ```EvaluableState```. Provide your concrete implementation with a method of evaluating the state.
