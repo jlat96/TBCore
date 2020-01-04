@@ -17,20 +17,23 @@ TrailBlazer is a path finding and artificial intelligence library for .NET. Our 
 
 ## Getting Started
 
+Download libraries using NuGet for .NET Core or download the TrailBlazer source project
+
 |Project  |Download                                  |
 |---------|------------------------------------------|
 |Optimizer|Comning soon!                             |
 |Source   |https://github.com/jlat96/TBCore/releases |
 
-## Package Contents
+## Library Contents
 
 ### Optimizer
 
 Optimizer aims to provide tools to maximize or minimize configurations of states using algoritms like Hill Climbing and Monte Carlo evaluation.
 
-#### Usage
+#### Climber
 
-* Create a state class that can calculate a utility score that implements ```IEvaluable```, ```ITypedClonable```, and ```IComparable```. 
-* Create an ```ISuccessorGenerator``` implentation that will create neighbor states for a your ```IEvaluable``` type (Tip: extend ```AbstractEvaluable``` to simplify the implementation). 
-* Create an instance of Climber with the an ```IComparer``` that will yield your desired result (uphill or downhill climing). 
-* Create an instance of your hill climber and invoke ```Optimize```
+```HillClimber``` implements a versions of the [Hill Climbing Local Search Algorithm](https://en.wikipedia.org/wiki/Hill_climbing).
+
+* Create a state class that can calculate a utility score that extends ```EvaluableState```. Provide your concrete implementation with a method of evaluating the state.
+* Create an implementation of ```ISuccessorGenerator``` that will be responsible for creating a neighborhood of successor states from any given state.
+* Create an implementation of ```SuccessorPicker``` that will use the successor states that your ```SuccessorGenerator``` created to determine the the next state in the climbing operation.
