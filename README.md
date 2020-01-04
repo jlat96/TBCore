@@ -47,4 +47,8 @@ Optimizer aims to provide tools to maximize or minimize configurations of states
   3. Initialize the selected ClimberAlgorithm with the seleted comparer and successor picker. Optionally, you can initialize the algorithm to perform a ```greedy``` (First Search) evaluation.
   4. Choose a HillClimber from the included climbers or create your own implementation of ```HillClimber```.
   5. Initialize the selected HillClimber with the ```ClimberAlgorithm``` created in step 3
+  
+* Use the HillClimber
+  1. Start the hill climber by invoking ```HillClimber.PerformOptimization(TState)``` to optimize the given initial state.
+  
 
