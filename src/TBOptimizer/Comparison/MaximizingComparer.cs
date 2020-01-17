@@ -4,6 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace TrailBlazer.TBOptimizer.Comparison
 {
+    /// <summary>
+    /// A comparer that will determine if the left side is greater than the right.
+    /// </summary>
+    /// <typeparam name="TState">The type of the state being compared</typeparam>
     public class MaximizingComparer<TState> : IComparer<TState>
         where TState : IComparable<TState>
     {
