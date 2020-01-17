@@ -15,6 +15,10 @@
 
 TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful and expandable suite of path finding tools to easily implement path finding and local search into applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope and scale can make use of efficient tools without each project requiring a complex independent implementation.
 
+## Compatibility
+
+TBCore is compatible with the .NET Standard 2.1
+
 ## Getting Started
 
 Download libraries using NuGet for .NET Core or download the TrailBlazer source project
