@@ -20,7 +20,7 @@ namespace TrailBlazer.TBOptimizer.Climber
         /// Creates a HillClimber that will perform an optimization from the given ClimberAlgrithm.
         /// </summary>
         /// <param name="algorithm">The climber algorithm to use for optimzation</param>
-        protected HillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm) : base (algorithm.GetSuccessorPicker())
+        protected HillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm) : base (algorithm.SuccessorPicker)
         {
             this.algorithm = algorithm;
 
