@@ -50,8 +50,10 @@ jobs:
           command: |
             cd tb_workspace\repo\src
             dotnet.exe test
-      - store_test_results:
-          path: test-results
+      # - store_test_results:
+      #     path: ~/test-results
+      # - store_artifacts:
+      #     path: ~/test-results
   
   package_deploy_optimizer:
     executor:
@@ -70,35 +72,20 @@ jobs:
       - store_artifacts: 
           path: C:\Users\circleci\project\tb_workspace\repo\nupkg\optimizer\Optimizer.0.0.1.nupkg
 
-  deploy_optimizer:
-    executor:
-      name: win/vs2019
-      shell: powershell.exe
-    steps:
-      - run:
-          name: "Deploy Optimizer"
-          command: echo "TEST"
-
 workflows:
   version: 2
-  # commit:
-  #   jobs:
-  #     - checkout-workspace
-  #     - unit-test:
-  #         requires:
-  #           - checkout-workspace
-  nuget-deploy-optimizer:
+  test-deploy-optimizer:
     jobs:
       - checkout-workspace
       - unit-test:
           requires:
             - checkout-workspace
-      # - package_deploy_optimizer:
-      #     requires:
-      #       - unit-test
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
+      - package_deploy_optimizer:
+          requires:
+            - unit-test
+          filters:
+            branches:
+              only:
+                - master
     
 

@@ -9,24 +9,59 @@ namespace Trailblazer.TBOptimizer.Randomizer
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
-        private readonly IComparer<TEvaluation> evaluationComparer;
-        private readonly int numRepeats;
 
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker, int numRepeats)
+        /// <summary>
+        /// Create a new StateRandomizer with the given compaer, using the given SuccessorPicker that will perform
+        /// a single randomization and return the most optimal result
+        /// </summary>
+        /// <param name="evaluationComparer"></param>
+        /// <param name="successorPicker"></param>
+        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker)
+            : this(evaluationComparer, successorPicker, 1) { }
+
+        /// <summary>
+        /// Create a new StateRandomizer with the given compaer, using the given SuccessorPicker that will perform
+        /// the given number of randomizations before returning a result. A numRanfomizations of -1 will have the optimier
+        /// return the first encountered optimal state
+        /// </summary>
+        /// <param name="evaluationComparer"></param>
+        /// <param name="successorPicker"></param>
+        /// <param name="numRandomizations"></param>
+        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker, int numRandomizations)
             : base (successorPicker)
         {
-            this.evaluationComparer = evaluationComparer;
-            this.numRepeats = numRepeats;
+            EvaluationComparer = evaluationComparer;
+            NumRandomizations = numRandomizations;
         }
 
+        /// <summary>
+        /// The <see cref="IComparer{TEvaluation}">Comparer</see> used in state evaluation comparison
+        /// </summary>
+        internal IComparer<TEvaluation> EvaluationComparer { get; set; }
+
+        /// <summary>
+        /// The number of times that the optimizer will attempt to find a more optimal state.
+        /// </summary>
+        internal int NumRandomizations { get; set; } = 1;
+
+        /// <summary>
+        /// Performs a Monte Carlo optimization on the given initial state.
+        /// </summary>
+        /// <param name="initialState"></param>
+        /// <returns>The most optimal state encountered after performing the specified evaluations</returns>
         public override TState PerformOptimization(TState initialState)
         {
+            if (initialState == null)
+            {
+                throw new ArgumentException("Initial state cannot be null");
+            }
+
             TState bestState = initialState;
             TState nextState;
-            for (int i = 0; i < numRepeats; i++)
+            for (int i = 0; i < NumRandomizations && bestState > initialState; i++) // Test this
             {
                 nextState = successorPicker.Next(bestState);
-                bestState = evaluationComparer.Compare(bestState.GetEvaluation(), nextState.GetEvaluation()) > 0
+                bestState = EvaluationComparer.Compare(bestState.GetEvaluation(), nextState.GetEvaluation()) > 0
                     ? bestState
                     : nextState;
             }
