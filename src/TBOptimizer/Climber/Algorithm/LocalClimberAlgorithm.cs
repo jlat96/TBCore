@@ -47,14 +47,16 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
 
             while (true)
             {
-                System.Diagnostics.Debug.Write(currentState);
                 nextState = successorPicker.Next(currentState);
 
                 if (currentState.GetEvaluation().Equals(nextState.GetEvaluation()))
                 {
                     return currentState;
                 }
-
+# if DEBUG
+                Console.WriteLine($"Current:\n{currentState.ToString()}");
+                Console.WriteLine($"Next:\n{nextState.ToString()}");
+#endif
                 currentState = nextState;
             }
         }
