@@ -64,13 +64,13 @@ jobs:
     steps:
       - attach_workspace:
             at: tb_workspace
-      - run:
-            name: "Package Optimizer"
-            command: |
-              cd tb_workspace\repo\src
-              dotnet.exe pack Optimizer\Optimizer.csproj -o nupkg\optimizer -p:PackageVersion=0.0.1.0
-      - store_artifacts: 
-          path: C:\Users\circleci\project\tb_workspace\repo\nupkg\optimizer\Optimizer.0.0.1.nupkg
+      # - run:
+      #      name: "Package Optimizer"
+      #      command: |
+      #        cd tb_workspace\repo\src
+      #        dotnet.exe pack Optimizer\Optimizer.csproj -o nupkg\optimizer -p:PackageVersion=0.0.1.0
+      # - store_artifacts: 
+      #    path: C:\Users\circleci\project\tb_workspace\repo\nupkg\optimizer\Optimizer.0.0.1.nupkg
 
 workflows:
   version: 2
