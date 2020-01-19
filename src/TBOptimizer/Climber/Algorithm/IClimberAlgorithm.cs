@@ -8,10 +8,11 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         where TState : IEvaluable<TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
+
         TState Optimize(TState initialState);
 
-        ISuccessorPicker<TState, TEvaluation> GetSuccessorPicker();
+        ISuccessorPicker<TState, TEvaluation> SuccessorPicker { get; }
 
-        IComparer<TEvaluation> GetComparisonStrategy();
+        IComparer<TEvaluation> ComparisonStrategy { get; }
     }
 }
