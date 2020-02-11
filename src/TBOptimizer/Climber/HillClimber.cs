@@ -28,9 +28,7 @@ namespace TrailBlazer.TBOptimizer.Climber
 
         public TState Optimize(TState initialState)
         {
-            PreOptimize();
             TState finalState = PerformOptimization(initialState);
-            PostOptimize(finalState);
             return finalState;
         }
 
@@ -42,23 +40,6 @@ namespace TrailBlazer.TBOptimizer.Climber
         public override TState PerformOptimization(TState initialState)
         {
             return algorithm.Optimize(initialState);
-        }
-
-        /// <summary>
-        /// Preforms an operation before optimization is performed
-        /// </summary>
-        protected virtual void PreOptimize()
-        {
-
-        }
-
-        /// <summary>
-        /// Performs an operation given the final state after optimization is performed
-        /// </summary>
-        /// <param name="finalState"></param>
-        protected virtual void PostOptimize(TState finalState)
-        {
-
         }
     }
 }

@@ -24,10 +24,17 @@ namespace TBOptimizerTests.TestModels.State
 
         public IEnumerable<TestIntegerEvaluableState> GetSuccessors(TestIntegerEvaluableState current)
         {
-            if (runCount == 0)
+            if (runCount++ == 0)
             {
                 initialValue = current.Value;
-                maxValue = Convert.ToInt32(Math.Pow(current.Value, 4));
+                try
+                {
+                    maxValue = Convert.ToInt32(Math.Pow(current.Value, 4));
+                }
+                catch (Exception)
+                {
+                    maxValue = int.MaxValue;
+                }
             }
 
             List<TestIntegerEvaluableState> neighbors = new List<TestIntegerEvaluableState>()
@@ -35,7 +42,7 @@ namespace TBOptimizerTests.TestModels.State
                 new TestIntegerEvaluableState(current.Value - 1),
             };
 
-            if (current.Value < 100000)
+            if (current.Value < maxValue)
             {
                 neighbors.Add(new TestIntegerEvaluableState(current.Value * current.Value));
             }

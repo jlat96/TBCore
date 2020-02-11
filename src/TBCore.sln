@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{69FFD294-7F44-49C6-9667-C8F51268BD7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraph", "TBGraph\TBGraph.csproj", "{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraphTest", "TBGraphTest\TBGraphTest.csproj", "{ADD58967-8745-436C-B6B7-BCC2FFE3E327}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -25,5 +29,13 @@ Global
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.Build.0 = Release|Any CPU
+		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Release|anycpu.Build.0 = Release|Any CPU
+		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

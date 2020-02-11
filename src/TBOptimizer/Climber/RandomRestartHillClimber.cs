@@ -78,13 +78,15 @@ namespace TrailBlazer.TBOptimizer.Climber
         public override TState PerformOptimization(TState initialState)
         {
             List<TState> winnerStates = new List<TState>();
-            Parallel.For(0, numRestarts - 1, parallelOptions, i => {
-                TState localWinner = base.PerformOptimization(stateRandomizer.Next(initialState));
+            for (int i = 0; i < numRestarts; i++)
+            { 
+                TState nextRestart = stateRandomizer.Next(initialState);
+                TState localWinner = base.PerformOptimization(nextRestart);
                 lock (winnerStates)
                 {
                     winnerStates.Add(localWinner);
                 }
-            });
+            }
             return winnerStates.OrderByDescending(s => s.GetEvaluation()).First();
         }
     }

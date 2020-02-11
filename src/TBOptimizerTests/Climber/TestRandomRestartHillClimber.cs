@@ -65,7 +65,7 @@ namespace OptimizerTests.Climber
             climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
 
 
-            RunTest(climber, 1, 100000);
+            RunTest(climber, 1, 64);
         }
 
         private void RunTest(Optimizer<TestIntegerEvaluableState, int> climber, int initialStateValue, int expectedOptimalValue)
@@ -73,21 +73,23 @@ namespace OptimizerTests.Climber
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(initialStateValue);
             TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(initialStateValue);
 
-            Stopwatch timer = new Stopwatch();
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
-            timer.Start();
+            //Stopwatch timer = new Stopwatch();
+            //Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
+            //timer.Start();
 
-            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
-            {
-            }
+            //while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
+            //{
+            //}
 
-            timer.Stop();
+            //timer.Stop();
 
-            Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
+            //Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
 
-            resultState = optimizeTask.Result;
+            //resultState = optimizeTask.Result;
 
-            Assert.AreEqual(100, resultState.Value);
+            resultState = climber.PerformOptimization(initialState);
+
+            Assert.AreEqual(expectedOptimalValue, resultState.Value);
         }
     }
 }
