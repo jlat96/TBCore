@@ -34,24 +34,7 @@ namespace OptimizerTests.Climber
             randomizer = new TestIntegerEvaluableStateNonRandomizer();
             climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
 
-            TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(2);
-
-            Stopwatch timer = new Stopwatch();
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
-            timer.Start();
-
-            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
-            {
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
-
-            resultState = optimizeTask.Result;
-
-            Assert.AreEqual(100, resultState.Value);
+            RunTest(climber, 2, 100);
         }
 
         [Test]
@@ -73,21 +56,20 @@ namespace OptimizerTests.Climber
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(initialStateValue);
             TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(initialStateValue);
 
-            //Stopwatch timer = new Stopwatch();
-            //Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
-            //timer.Start();
+            Stopwatch timer = new Stopwatch();
+            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
+            timer.Start();
 
-            //while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
-            //{
-            //}
+            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
+            {
+            }
 
-            //timer.Stop();
+            timer.Stop();
 
-            //Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
+            Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "Operation failed");
 
-            //resultState = optimizeTask.Result;
-
-            resultState = climber.PerformOptimization(initialState);
+            resultState = optimizeTask.Result;
 
             Assert.AreEqual(expectedOptimalValue, resultState.Value);
         }
