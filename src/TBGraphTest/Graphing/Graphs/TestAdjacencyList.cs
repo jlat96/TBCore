@@ -219,7 +219,7 @@ namespace TBGraphTest.Graphing.Graphs
             while(enumerator.MoveNext())
             {
                 current = enumerator.Current;
-                Assert.AreEqual(current.Key, expecteds[current.Key - 1]);
+                Assert.AreEqual(expecteds[current.Key - 1], current.Value);
             }
         }
     }
