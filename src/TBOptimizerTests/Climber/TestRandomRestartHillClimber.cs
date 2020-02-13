@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using OptimizerTests.TestModels.Evaluable;
 using OptimizerTests.TestModels.State;
+using TBOptimizerTests.TestModels.State;
 using TrailBlazer.TBOptimizer;
 using TrailBlazer.TBOptimizer.Climber;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
@@ -27,14 +28,33 @@ namespace OptimizerTests.Climber
         public void TestRandomRestartHillClimberSameRestartPointEachTime()
         {
             comparer = new MaximizingComparer<int>();
-            generator = new TestIntegerSuccessorGenerator();
+            generator = new TestLinearIntegerSuccessorGenerator();
             picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             randomizer = new TestIntegerEvaluableStateNonRandomizer();
             climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
 
-            TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(2);
+            RunTest(climber, 2, 100);
+        }
+
+        [Test]
+        public void TestRandomRestartHillClimberIncrementingRestartPoint()
+        {
+            comparer = new MaximizingComparer<int>();
+            generator = new TestExponentialIntegerSuccessorGenerator();
+            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
+            randomizer = new TestIntegerRandomizerSimulator();
+            climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
+
+
+            RunTest(climber, 1, 64);
+        }
+
+        private void RunTest(Optimizer<TestIntegerEvaluableState, int> climber, int initialStateValue, int expectedOptimalValue)
+        {
+            TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(initialStateValue);
+            TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(initialStateValue);
 
             Stopwatch timer = new Stopwatch();
             Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initialState));
@@ -47,10 +67,11 @@ namespace OptimizerTests.Climber
             timer.Stop();
 
             Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "Operation failed");
 
             resultState = optimizeTask.Result;
 
-            Assert.AreEqual(100, resultState.Value);
+            Assert.AreEqual(expectedOptimalValue, resultState.Value);
         }
     }
 }

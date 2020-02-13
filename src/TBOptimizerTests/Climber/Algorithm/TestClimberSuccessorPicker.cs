@@ -17,7 +17,7 @@ namespace OptimizerTests.Climber.Algorithm
         [SetUp]
         public void Setup()
         {
-            generator = new TestIntegerSuccessorGenerator();
+            generator = new TestLinearIntegerSuccessorGenerator();
             picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
         }
 
