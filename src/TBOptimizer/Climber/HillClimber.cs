@@ -1,4 +1,5 @@
 ﻿using System;
+using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
 using TrailBlazer.TBOptimizer.State;
 
@@ -10,11 +11,11 @@ namespace TrailBlazer.TBOptimizer.Climber
     /// </summary>
     /// <typeparam name="TState">The type of the EvaluableState that is being evaluated</typeparam>
     /// <typeparam name="TEvaluation">The type of the Comparable result of an evaluation</typeparam>
-    public abstract class HillClimber<TState, TEvaluation> : Optimizer<TState, TEvaluation>
+    public abstract class HillClimber<TState, TEvaluation> : Optimizer<TState, TEvaluation>, IClimberEventHandler<TState, TEvaluation>
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
-        protected readonly IClimberAlgorithm<TState, TEvaluation> algorithm;
+        protected readonly ClimberAlgorithm<TState, TEvaluation> algorithm;
 
         /// <summary>
         /// Creates a HillClimber that will perform an optimization from the given ClimberAlgrithm.
@@ -23,8 +24,10 @@ namespace TrailBlazer.TBOptimizer.Climber
         protected HillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm) : base (algorithm.SuccessorPicker)
         {
             this.algorithm = algorithm;
-
+            this.algorithm.ClimbStepPerformed += OnClimberStepEvent;
         }
+
+        public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimberStepPerformedEvent;
 
         public TState Optimize(TState initialState)
         {
@@ -40,6 +43,14 @@ namespace TrailBlazer.TBOptimizer.Climber
         public override TState PerformOptimization(TState initialState)
         {
             return algorithm.Optimize(initialState);
+        }
+
+        public void OnClimberStepEvent(object sender, ClimberStepEvent<TState, TEvaluation> e)
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine($"Event bubbling from {sender.GetType()}\n{e.ToString()}");
+#endif
+            ClimberStepPerformedEvent?.Invoke(sender, e);
         }
     }
 }

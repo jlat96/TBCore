@@ -5,11 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBUtils", "TBUtils\TBUtils.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\TBOptimizer.csproj", "{420C0A6C-D6C4-4807-9A29-05EDE74B1251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{69FFD294-7F44-49C6-9667-C8F51268BD7E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraph", "TBGraph\TBGraph.csproj", "{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraphTest", "TBGraphTest\TBGraphTest.csproj", "{ADD58967-8745-436C-B6B7-BCC2FFE3E327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.Build.0 = Release|Any CPU
-		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.ActiveCfg = Debug|Any CPU
-		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Debug|anycpu.Build.0 = Debug|Any CPU
-		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.ActiveCfg = Release|Any CPU
-		{69FFD294-7F44-49C6-9667-C8F51268BD7E}.Release|anycpu.Build.0 = Release|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.ActiveCfg = Debug|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Release|anycpu.ActiveCfg = Release|Any CPU
@@ -37,5 +33,9 @@ Global
 		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{ADD58967-8745-436C-B6B7-BCC2FFE3E327}.Release|anycpu.Build.0 = Release|Any CPU
+		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using OptimizerTests.TestModels.Evaluable;
 using OptimizerTests.TestModels.State;
+using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
 using TrailBlazer.TBOptimizer.Comparison;
 using TrailBlazer.TBOptimizer.State;
@@ -17,6 +18,7 @@ namespace OptimizerTests.Climber.Algorithm
         ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
         ClimberSuccessorPicker<TestIntegerEvaluableState, int> picker;
         ClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
+        bool eventHandled;
 
         [SetUp]
         public void Setup()
@@ -24,6 +26,8 @@ namespace OptimizerTests.Climber.Algorithm
             generator = new TestLinearIntegerSuccessorGenerator();
             picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(new MaximizingComparer<int>(), picker);
+            algorithm.ClimbStepPerformed += OnEvent;
+            eventHandled = false;
         }
 
         [Test]
@@ -49,6 +53,8 @@ namespace OptimizerTests.Climber.Algorithm
             TestIntegerEvaluableState result = task.Result;
 
             Assert.AreEqual(100, result.Value);
+            Assert.IsTrue(eventHandled);
+
         }
 
         [Test]
@@ -76,6 +82,13 @@ namespace OptimizerTests.Climber.Algorithm
             TestIntegerEvaluableState result = optimizeTask.Result;
 
             Assert.AreEqual(50, result.Value);
+            Assert.IsTrue(eventHandled);
+        }
+
+        private void OnEvent(object sender, ClimberStepEvent<TestIntegerEvaluableState, int> e)
+        {
+            System.Diagnostics.Debug.WriteLine(e);
+            eventHandled = true;
         }
     }
 }
