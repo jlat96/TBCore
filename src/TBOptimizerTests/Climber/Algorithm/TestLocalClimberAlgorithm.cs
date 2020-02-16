@@ -33,8 +33,6 @@ namespace OptimizerTests.Climber.Algorithm
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
             Task<TestIntegerEvaluableState> task = Task.Run(() => algorithm.Optimize(initialState));
 
-            algorithm.ClimbStepPerformed += OnEvent;
-
             Stopwatch timer = new Stopwatch();
             timer.Start();
             while (!task.IsCompleted && timer.ElapsedMilliseconds < 5000)
