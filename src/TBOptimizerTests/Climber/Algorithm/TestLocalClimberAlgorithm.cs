@@ -18,7 +18,6 @@ namespace OptimizerTests.Climber.Algorithm
         ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
         ClimberSuccessorPicker<TestIntegerEvaluableState, int> picker;
         ClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
-        bool eventHandled;
 
         [SetUp]
         public void Setup()
@@ -26,34 +25,27 @@ namespace OptimizerTests.Climber.Algorithm
             generator = new TestLinearIntegerSuccessorGenerator();
             picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(new MaximizingComparer<int>(), picker);
-            algorithm.ClimbStepPerformed += OnEvent;
-            eventHandled = false;
         }
 
         [Test]
-        public void TestOptimize()
+        public void TestOptimizeCorrectOptimalValueReached()
         {
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-
             Task<TestIntegerEvaluableState> task = Task.Run(() => algorithm.Optimize(initialState));
+
+            algorithm.ClimbStepPerformed += OnEvent;
 
             Stopwatch timer = new Stopwatch();
             timer.Start();
-
-            bool complete = false;
-
-            while (!complete && timer.ElapsedMilliseconds < 5000)
+            while (!task.IsCompleted && timer.ElapsedMilliseconds < 5000)
             {
-                complete = task.IsCompleted;
             }
             timer.Stop();
 
-            Assert.IsTrue(complete, "Optimization took too long to complete");
-
+            Assert.IsTrue(task.IsCompleted, "Optimization took too long to complete");
             TestIntegerEvaluableState result = task.Result;
 
             Assert.AreEqual(100, result.Value);
-            Assert.IsTrue(eventHandled);
 
         }
 
@@ -70,25 +62,61 @@ namespace OptimizerTests.Climber.Algorithm
 
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            bool complete = false;
-            while(!complete && timer.ElapsedMilliseconds < 5000)
+            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 10000)
             {
-                complete = optimizeTask.IsCompleted;
             }
 
             timer.Stop();
 
-            Assert.IsTrue(complete, "Optimization did not stop at local maxima");
-            TestIntegerEvaluableState result = optimizeTask.Result;
+            Assert.IsTrue(optimizeTask.IsCompleted, "Optimization did not stop at local maxima");
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
 
-            Assert.AreEqual(50, result.Value);
-            Assert.IsTrue(eventHandled);
+            TestIntegerEvaluableState result = optimizeTask.Result;
+            Assert.AreEqual(50, result.Value, "Encountered states do not match");
         }
 
-        private void OnEvent(object sender, ClimberStepEvent<TestIntegerEvaluableState, int> e)
+        public void TestOptimizeEmitsEventsInOrder()
         {
-            System.Diagnostics.Debug.WriteLine(e);
-            eventHandled = true;
+            IComparer<int> comparer = new MaximizingComparer<int>();
+            generator = new TestIntegerLocalMaximaSuccessorGenerator();
+            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
+
+            List<int> encounteredStates = new List<int>();
+            List<int> expectedStates = new List<int>();
+
+            for (int i = 3; i <= 50; i++)
+            {
+                expectedStates.Add(i);
+            }
+
+            void OnEvent(object source, ClimberStepEvent<TestIntegerEvaluableState, int> e)
+            {
+                encounteredStates.Add(e.StepState.Value);
+            }
+
+            algorithm.ClimbStepPerformed += OnEvent;
+
+            TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
+            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => algorithm.Optimize(initialState));
+
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 10000)
+            {
+            }
+
+            timer.Stop();
+
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
+
+            TestIntegerEvaluableState result = optimizeTask.Result;
+
+            Assert.AreEqual(expectedStates.Count, encounteredStates.Count);
+            for (int i = 0; i < expectedStates.Count; i++)
+            {
+                Assert.AreEqual(encounteredStates[i], expectedStates[i], "Encountered states do not match");
+            }
         }
     }
 }
