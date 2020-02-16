@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraphTest", "TBGraphTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerDemo_PokerSquares", "TBOptimizerDemo_PokerSquares\TBOptimizerDemo_PokerSquares.csproj", "{E3F4BEA6-D97D-4722-86FA-0CD66C441C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
