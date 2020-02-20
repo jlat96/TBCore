@@ -38,13 +38,13 @@ namespace OptimizerTests.Climber.Algorithm
             while (!task.IsCompleted && timer.ElapsedMilliseconds < 5000)
             {
             }
+
             timer.Stop();
+            Assert.IsTrue(optimizeTask.IsCompleted, "Optimization did not stop at local maxima");
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
 
-            Assert.IsTrue(task.IsCompleted, "Optimization took too long to complete");
-            TestIntegerEvaluableState result = task.Result;
-
-            Assert.AreEqual(100, result.Value);
-
+            TestIntegerEvaluableState result = optimizeTask.Result;
+            Assert.AreEqual(50, result.Value, "Encountered states do not match");
         }
 
         [Test]
