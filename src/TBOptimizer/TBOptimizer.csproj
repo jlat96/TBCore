@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Climber\Events\" />
+    <Folder Include="Setup\" />
   </ItemGroup>
 </Project>
