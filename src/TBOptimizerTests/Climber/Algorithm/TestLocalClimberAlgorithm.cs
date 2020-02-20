@@ -38,13 +38,13 @@ namespace OptimizerTests.Climber.Algorithm
             while (!task.IsCompleted && timer.ElapsedMilliseconds < 5000)
             {
             }
+
             timer.Stop();
+            Assert.IsTrue(optimizeTask.IsCompleted, "Optimization did not stop at local maxima");
+            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
 
-            Assert.IsTrue(task.IsCompleted, "Optimization took too long to complete");
-            TestIntegerEvaluableState result = task.Result;
-
-            Assert.AreEqual(100, result.Value);
-
+            TestIntegerEvaluableState result = optimizeTask.Result;
+            Assert.AreEqual(50, result.Value, "Encountered states do not match");
         }
 
         [Test]
@@ -115,33 +115,6 @@ namespace OptimizerTests.Climber.Algorithm
             {
                 Assert.AreEqual(encounteredStates[i], expectedStates[i], "Encountered states do not match");
             }
-        }
-
-        [Test]
-        public void TestOptimizeStopsAtLocalExtrema()
-        {
-            IComparer<int> comparer = new MaximizingComparer<int>();
-            generator = new TestIntegerLocalMaximaSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
-
-            TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => algorithm.Optimize(initialState));
-
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-            bool complete = false;
-            while(!complete && timer.ElapsedMilliseconds < 5000)
-            {
-                complete = optimizeTask.IsCompleted;
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(complete, "Optimization did not stop at local maxima");
-            TestIntegerEvaluableState result = optimizeTask.Result;
-
-            Assert.AreEqual(50, result.Value);
         }
     }
 }
