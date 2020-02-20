@@ -73,6 +73,7 @@ namespace OptimizerTests.Climber.Algorithm
             Assert.AreEqual(50, result.Value, "Encountered states do not match");
         }
 
+        [Test]
         public void TestOptimizeEmitsEventsInOrder()
         {
             IComparer<int> comparer = new MaximizingComparer<int>();
