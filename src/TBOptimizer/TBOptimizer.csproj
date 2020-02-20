@@ -31,4 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\TBUtils\TBUtils.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Climber\Events\" />
+    <Folder Include="Setup\" />
+  </ItemGroup>
 </Project>

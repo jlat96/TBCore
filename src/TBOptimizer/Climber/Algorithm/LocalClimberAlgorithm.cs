@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.State;
 
 namespace TrailBlazer.TBOptimizer.Climber.Algorithm
@@ -40,6 +41,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         /// <returns></returns>
         public override TState Optimize(TState initialState)
         {
+            int stepCount = 0;
             TState currentState;
             TState nextState;
 
@@ -58,7 +60,17 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
                 Console.WriteLine($"Next:\n{nextState.ToString()}");
 #endif
                 currentState = nextState;
+                EmitState(currentState, ++stepCount);
             }
+        }
+
+        private void EmitState(TState currentState, int stepCount)
+        {
+            ClimbStepPerformed?.Invoke(this, new ClimberStepEvent<TState, TEvaluation>()
+            {
+                StepsPerformed = stepCount,
+                StepState = currentState,
+            });
         }
     }
 }

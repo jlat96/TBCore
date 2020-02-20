@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.State;
 
 namespace TrailBlazer.TBOptimizer.Climber.Algorithm
@@ -45,6 +46,8 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
             this.comparisonStrategy = comparisonStrategy;
             this.greedy = greedy;
         }
+
+        public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimbStepPerformed;
 
         /// <summary>
         /// The comparison strategy that Optimize will use to compare evaluations
