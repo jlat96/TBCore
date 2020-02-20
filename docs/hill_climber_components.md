@@ -99,4 +99,13 @@ public class MatrixSwapGenerator : ISuccessorGenerator<MultaplicativeMatrixState
 
 ## ClimberSuccessorPicker
 
+The ClimberSuccessorPicker will use the SuccessorGenerator and the chose Comparer to generate all of the neighbor states for a given state and select the most optimal of them. The chosen state will be compared at each step of the climber against the current most optimal state. 
+
+The successor picker will store each selected state and will try to save time when selecting new optimal states.
+
+## ClimberAlgorithm
+
+The ClimberAlgorithm uses the comparison strategy, and successor generator to incrementally optimize against the next most optimal neighbor state until no more optimal state can be reached at a local maximum or minimum.
+
 ## Hill Climber
+
