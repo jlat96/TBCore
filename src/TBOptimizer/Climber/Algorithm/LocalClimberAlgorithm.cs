@@ -55,10 +55,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
                 {
                     return currentState;
                 }
-# if DEBUG
-                Console.WriteLine($"Current:\n{currentState.ToString()}");
-                Console.WriteLine($"Next:\n{nextState.ToString()}");
-#endif
+
                 currentState = nextState;
                 EmitState(currentState, ++stepCount);
             }
