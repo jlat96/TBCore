@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraphTest", "TBGraphTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer_CLI_Demo", "TBOptimizer_CLI_Demo\TBOptimizer_CLI_Demo.csproj", "{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -37,5 +39,9 @@ Global
 		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}.Release|anycpu.Build.0 = Release|Any CPU
+		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
