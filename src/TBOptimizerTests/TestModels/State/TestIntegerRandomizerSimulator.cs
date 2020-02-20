@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using OptimizerTests.TestModels.Evaluable;
 using TBOptimizer.State;

@@ -33,7 +33,6 @@ namespace OptimizerTests.Climber
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             randomizer = new TestIntegerEvaluableStateNonRandomizer();
             climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
-
             RunTest(climber, 2, 100);
         }
 
