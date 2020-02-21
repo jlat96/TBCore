@@ -32,7 +32,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         /// <param name="greedy">Determines the greedyness of the algorithm</param>
         /// <param name="comparisonStrategy">The Comparer that which Optimize will use to compare optimizations</param>
         /// <param name="successorPicker">The successor picker to choose the next EvaluableState in to evaluate at an optimization step</param>
-        public LocalClimberAlgorithm(bool greedy, IComparer<TEvaluation> comparisonStrategy, ISuccessorPicker<TState, TEvaluation> successorPicker) : base(greedy, comparisonStrategy, successorPicker) { }
+        public LocalClimberAlgorithm(bool greedy, IComparer<TEvaluation> comparisonStrategy, ISuccessorPicker<TState, TEvaluation> successorPicker) : base((ccomparisonStrategy, successorPicker) { }
 
         /// <summary>
         /// Returns the most optimal state that is encountered before no state with a better evaluation is generated.
