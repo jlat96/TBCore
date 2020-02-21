@@ -17,7 +17,7 @@ namespace TrailBlazer.TBOptimizer.Climber
         /// <param name="comparer">The comparison strategy to optimize with</param>
         /// <param name="successorGenerator">The successor genereator from which the best state will be selected</param>
         public GeneralHillClimber(IComparer<int> comparer, ISuccessorGenerator<TState, int> successorGenerator)
-            : this(new LocalClimberAlgorithm<TState, int>(comparer, new ClimberSuccessorPicker<TState, int>(successorGenerator, comparer))) { }
+            : this(new LocalClimberAlgorithm<TState, int>(comparer, new ClimberSuccessorSelector<TState, int>(successorGenerator, comparer))) { }
 
         /// <summary>
         /// Creates a new GeneralHillClimber using the given ClimberAlgorithm for integer evaluation

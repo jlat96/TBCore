@@ -24,7 +24,7 @@ namespace TrailBlazer.TBOptimizer.Climber
         /// <param name="comparer">The comparison strategy to optimize with</param>
         /// <param name="successorGenerator">The successor genereator from which the best state will be selected</param>
         public HillClimber(IComparer<TEvaluation> comparer, ISuccessorGenerator<TState, TEvaluation> successorGenerator)
-            : this(new LocalClimberAlgorithm<TState, TEvaluation>(comparer, new ClimberSuccessorPicker<TState, TEvaluation>(successorGenerator, comparer))) { }
+            : this(new LocalClimberAlgorithm<TState, TEvaluation>(comparer, new ClimberSuccessorSelector<TState, TEvaluation>(successorGenerator, comparer))) { }
 
         /// <summary>
         /// Creates a HillClimber that will perform an optimization from the given ClimberAlgrithm.
@@ -33,23 +33,17 @@ namespace TrailBlazer.TBOptimizer.Climber
         public HillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm) : base (algorithm.SuccessorPicker)
         {
             this.algorithm = algorithm;
-            this.algorithm.ClimbStepPerformed += OnClimberStepEvent;
+            this.algorithm.ClimbStepPerformedEvent += OnClimberStepEvent;
         }
 
         public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimberStepPerformedEvent;
-
-        public TState Optimize(TState initialState)
-        {
-            TState finalState = PerformOptimization(initialState);
-            return finalState;
-        }
 
         /// <summary>
         /// Performs the climber optimization from a given initialState
         /// </summary>
         /// <param name="initialState">The initial state for which to optimize</param>
         /// <returns>The most optimal state encountered by the climber. This may not be the best possible state</returns>
-        public override TState PerformOptimization(TState initialState)
+        public override TState Optimize(TState initialState)
         {
             return algorithm.Optimize(initialState);
         }

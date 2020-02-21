@@ -12,13 +12,13 @@ namespace OptimizerTests.Climber.Algorithm
     public class TestClimberSuccessorPicker
     {
         private ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
-        private ClimberSuccessorPicker<TestIntegerEvaluableState, int> picker;
+        private ClimberSuccessorSelector<TestIntegerEvaluableState, int> picker;
 
         [SetUp]
         public void Setup()
         {
             generator = new TestLinearIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
         }
 
         [Test]

@@ -5,7 +5,7 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace TrailBlazer.TBOptimizer.Climber.Algorithm
 {
-    public class ClimberSuccessorPicker<TState, TEvaluation> : ISuccessorPicker<TState, TEvaluation>
+    public class ClimberSuccessorSelector<TState, TEvaluation> : ISuccessorSelector<TState, TEvaluation>
         where TState : IEvaluable<TEvaluation>
         where TEvaluation: IComparable<TEvaluation>
     {
@@ -14,7 +14,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
 
         private readonly ISet<TState> encounteredStates;
 
-        public ClimberSuccessorPicker(ISuccessorGenerator<TState, TEvaluation> generator, IComparer<TEvaluation> comparer)
+        public ClimberSuccessorSelector(ISuccessorGenerator<TState, TEvaluation> generator, IComparer<TEvaluation> comparer)
         {
             this.generator = generator;
             this.comparer = comparer;

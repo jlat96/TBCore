@@ -4,7 +4,7 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace TBOptimizer.State
 {
-    public abstract class StatePicker<TState, TEvaluable> : ISuccessorPicker<TState, TEvaluable>
+    public abstract class StatePicker<TState, TEvaluable> : ISuccessorSelector<TState, TEvaluable>
         where TState : EvaluableState<TState, TEvaluable>
         where TEvaluable : IComparable<TEvaluable>
     {

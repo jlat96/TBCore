@@ -4,7 +4,7 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace  OptimizerTests.TestModels.State
 {
-    public class TestIntegerEvaluableStateNonRandomizer : ISuccessorPicker<TestIntegerEvaluableState, int>
+    public class TestIntegerEvaluableStateNonRandomizer : ISuccessorSelector<TestIntegerEvaluableState, int>
     {
         public TestIntegerEvaluableStateNonRandomizer() 
         {

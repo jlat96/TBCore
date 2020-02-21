@@ -11,7 +11,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
 
         TState Optimize(TState initialState);
 
-        ISuccessorPicker<TState, TEvaluation> SuccessorPicker { get; }
+        ISuccessorSelector<TState, TEvaluation> SuccessorPicker { get; }
 
         IComparer<TEvaluation> ComparisonStrategy { get; }
     }

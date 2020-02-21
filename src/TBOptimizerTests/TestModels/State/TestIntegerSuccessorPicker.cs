@@ -7,7 +7,7 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace OptimizerTests.TestModels.State
 {
-    public class TestIntegerSuccessorPicker: ISuccessorPicker<TestIntegerEvaluableState, int>
+    public class TestIntegerSuccessorPicker: ISuccessorSelector<TestIntegerEvaluableState, int>
     {
 
         private readonly IComparer<int> comparer;

@@ -7,13 +7,13 @@ namespace TrailBlazer.TBOptimizer
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
-        protected ISuccessorPicker<TState, TEvaluation> successorPicker;
+        protected ISuccessorSelector<TState, TEvaluation> successorPicker;
 
-        protected Optimizer(ISuccessorPicker<TState, TEvaluation> successorPicker)
+        protected Optimizer(ISuccessorSelector<TState, TEvaluation> successorPicker)
         {
             this.successorPicker = successorPicker;
         }
 
-        public abstract TState PerformOptimization(TState initialState);
+        public abstract TState Optimize(TState initialState);
     }
 }

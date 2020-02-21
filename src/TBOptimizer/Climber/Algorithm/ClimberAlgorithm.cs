@@ -15,7 +15,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         where TEvaluation : IComparable<TEvaluation>
     {
         protected IComparer<TEvaluation> comparisonStrategy;
-        protected ISuccessorPicker<TState, TEvaluation> successorPicker;
+        protected ISuccessorSelector<TState, TEvaluation> successorPicker;
 
         /// <summary>
         /// Creates a new ClimberAlgorithm using the given comparison strategy to compare
@@ -26,13 +26,13 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         /// <param name="successorPicker">The successor picker to choose the next EvaluableState in to evaluate at an optimization step</param>
         /// 
         protected ClimberAlgorithm(IComparer<TEvaluation> comparisonStrategy,
-            ISuccessorPicker<TState, TEvaluation> successorPicker)
+            ISuccessorSelector<TState, TEvaluation> successorPicker)
         {
             this.successorPicker = successorPicker;
             this.comparisonStrategy = comparisonStrategy;
         }
 
-        public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimbStepPerformed;
+        public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimbStepPerformedEvent;
 
         /// <summary>
         /// The comparison strategy that Optimize will use to compare evaluations.
@@ -49,7 +49,7 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         /// <summary>
         /// The successor picker that will choose the next EvaluableState at an optimization stage.
         /// </summary>
-        public ISuccessorPicker<TState, TEvaluation> SuccessorPicker {
+        public ISuccessorSelector<TState, TEvaluation> SuccessorPicker {
             get => successorPicker;
             internal set
             {

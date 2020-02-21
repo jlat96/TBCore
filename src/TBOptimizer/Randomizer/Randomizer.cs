@@ -16,7 +16,7 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// </summary>
         /// <param name="evaluationComparer"></param>
         /// <param name="successorPicker"></param>
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker)
+        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker)
             : this(evaluationComparer, successorPicker, 1) { }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// <param name="evaluationComparer"></param>
         /// <param name="successorPicker"></param>
         /// <param name="numRandomizations"></param>
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorPicker<TState, TEvaluation> successorPicker, int numRandomizations)
+        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker, int numRandomizations)
             : base (successorPicker)
         {
             EvaluationComparer = evaluationComparer;
@@ -49,7 +49,7 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// </summary>
         /// <param name="initialState"></param>
         /// <returns>The most optimal state encountered after performing the specified evaluations</returns>
-        public override TState PerformOptimization(TState initialState)
+        public override TState Optimize(TState initialState)
         {
             if (initialState == null)
             {

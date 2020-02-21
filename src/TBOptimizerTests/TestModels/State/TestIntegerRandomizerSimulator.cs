@@ -6,7 +6,7 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace OptimizerTests.TestModels.State
 {
-    public class TestIntegerRandomizerSimulator : ISuccessorPicker<TestIntegerEvaluableState, int>
+    public class TestIntegerRandomizerSimulator : ISuccessorSelector<TestIntegerEvaluableState, int>
     {
         private readonly List<int> numberSequence;
         private int sequenceNumber;
@@ -19,7 +19,7 @@ namespace OptimizerTests.TestModels.State
 
         public TestIntegerEvaluableState Next(TestIntegerEvaluableState current)
         {
-            int next = numberSequence[sequenceNumber++ % (numberSequence.Count - 1)];
+            int next = numberSequence[sequenceNumber++ % (numberSequence.Count)];
             return new TestIntegerEvaluableState(next);
         }
     }

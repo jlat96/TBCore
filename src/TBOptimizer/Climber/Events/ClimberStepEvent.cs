@@ -8,11 +8,11 @@ namespace TBOptimizer.Climber.Events
         where TEvaluation : IComparable<TEvaluation>
     {
         public int StepsPerformed { get; set; } = 0;
-        public TState StepState { get; set; }
+        public TState CurrentState { get; set; }
 
         public override string ToString()
         {
-            return $"Steps Completed: {StepsPerformed}\nCurrent State: {StepState.ToString()}";
+            return $"Steps Completed: {StepsPerformed}\nCurrent State: {CurrentState.ToString()}";
         }
     }
 

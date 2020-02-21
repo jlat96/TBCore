@@ -19,7 +19,7 @@ namespace OptimizerTests.Climber
     {
         private MaximizingComparer<int> comparer;
         private ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
-        private ClimberSuccessorPicker<TestIntegerEvaluableState, int> picker;
+        private ClimberSuccessorSelector<TestIntegerEvaluableState, int> picker;
         private LocalClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
         private GeneralHillClimber<TestIntegerEvaluableState> climber;
 
@@ -28,7 +28,7 @@ namespace OptimizerTests.Climber
         {
             comparer = new MaximizingComparer<int>();
             generator = new TestLinearIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
         }
@@ -41,19 +41,19 @@ namespace OptimizerTests.Climber
 
             List<TestIntegerEvaluableState> states = new List<TestIntegerEvaluableState>();
             List<TestIntegerEvaluableState> expectedStates = new List<TestIntegerEvaluableState>();
-            for(int i = 3; i <= 100; i++)
+            for (int i = 3; i <= 100; i++)
             {
                 expectedStates.Add(new TestIntegerEvaluableState(i));
             }
 
             void eventCallback(object sender, ClimberStepEvent<TestIntegerEvaluableState, int> args)
             {
-                states.Add(args.StepState);
+                states.Add(args.CurrentState);
             };
 
             climber.ClimberStepPerformedEvent += eventCallback;
 
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initial));
+            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.Optimize(initial));
 
             bool complete = false;
             Stopwatch timer = new Stopwatch();
@@ -85,11 +85,11 @@ namespace OptimizerTests.Climber
             TestIntegerEvaluableState result;
 
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
 
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.PerformOptimization(initial));
+            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.Optimize(initial));
 
             bool complete = false;
             Stopwatch timer = new Stopwatch();

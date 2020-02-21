@@ -12,6 +12,6 @@ namespace TrailBlazer.TBOptimizer
         /// </summary>
         /// <param name="initialState">The initial state from which to optimize</param>
         /// <returns>The most optimal state as determined by the hill climbing search</returns>
-        TState PerformOptimization(TState initialState);
+        TState Optimize(TState initialState);
     }
 }

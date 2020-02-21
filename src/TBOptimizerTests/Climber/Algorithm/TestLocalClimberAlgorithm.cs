@@ -16,14 +16,14 @@ namespace OptimizerTests.Climber.Algorithm
     public class TestLocalClimberAlgorithm
     {
         ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
-        ClimberSuccessorPicker<TestIntegerEvaluableState, int> picker;
+        ClimberSuccessorSelector<TestIntegerEvaluableState, int> picker;
         ClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
 
         [SetUp]
         public void Setup()
         {
             generator = new TestLinearIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(new MaximizingComparer<int>(), picker);
         }
 
@@ -52,7 +52,7 @@ namespace OptimizerTests.Climber.Algorithm
         {
             IComparer<int> comparer = new MaximizingComparer<int>();
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
 
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
@@ -78,7 +78,7 @@ namespace OptimizerTests.Climber.Algorithm
         {
             IComparer<int> comparer = new MaximizingComparer<int>();
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
-            picker = new ClimberSuccessorPicker<TestIntegerEvaluableState, int>(generator, comparer);
+            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
 
             List<int> encounteredStates = new List<int>();
@@ -91,10 +91,10 @@ namespace OptimizerTests.Climber.Algorithm
 
             void OnEvent(object source, ClimberStepEvent<TestIntegerEvaluableState, int> e)
             {
-                encounteredStates.Add(e.StepState.Value);
+                encounteredStates.Add(e.CurrentState.Value);
             }
 
-            algorithm.ClimbStepPerformed += OnEvent;
+            algorithm.ClimbStepPerformedEvent += OnEvent;
 
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
             Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => algorithm.Optimize(initialState));

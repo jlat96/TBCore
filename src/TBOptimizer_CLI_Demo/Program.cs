@@ -36,7 +36,7 @@ namespace TBOptimizer_CLI_Demo
         private static void OnEvent(object s, ClimberStepEvent<AddativeMatrixState, int> e)
         {
             iterations++;
-            Console.WriteLine($"Current Evaluation: {e.StepState.GetEvaluation()}\n{e.StepState.ToString()}\n");
+            Console.WriteLine($"Current Evaluation: {e.CurrentState.GetEvaluation()}\n{e.CurrentState.ToString()}\n");
         }
     }
 }

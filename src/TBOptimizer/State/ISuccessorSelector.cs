@@ -6,7 +6,7 @@ namespace TrailBlazer.TBOptimizer.State
     /// State selector for selecting a Next state based on a given initial state
     /// </summary>
     /// <typeparam name="TState"></typeparam>
-    public interface ISuccessorPicker<TState, TEvaluation>
+    public interface ISuccessorSelector<TState, TEvaluation>
         where TState : IEvaluable<TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
