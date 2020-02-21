@@ -59,18 +59,20 @@ namespace TrailBlazer.TBOptimizer.Climber
         /// <returns>The most optimal encountered state from the restarted operation</returns>
         public override TState Optimize(TState initialState)
         {
-            List<TState> winnerStates = new List<TState>();
+            TState winnerState = initialState;
             for (int i = 0; i < numRestarts; i++)
             { 
                 TState nextRestart = stateRandomizer.Next(initialState);
                 TState localWinner = base.Optimize(nextRestart);
-                lock (winnerStates)
+   
+                if (localWinner > winnerState)
                 {
-                    winnerStates.Add(localWinner);
+                    winnerState = localWinner;
                 }
+
                 EmitRestartCompletion(i, 0, nextRestart, localWinner);
             }
-            return winnerStates.OrderByDescending(s => s.GetEvaluation()).First();
+            return winnerState;
         }
 
         private void EmitRestartCompletion(int restartNumber, int totalSteps, TState initialState, TState optimizedState)
