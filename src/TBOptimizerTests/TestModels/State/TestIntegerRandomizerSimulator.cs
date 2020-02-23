@@ -19,7 +19,11 @@ namespace OptimizerTests.TestModels.State
 
         public TestIntegerEvaluableState Next(TestIntegerEvaluableState current)
         {
-            int next = numberSequence[sequenceNumber++ % (numberSequence.Count)];
+            int next;
+            lock (numberSequence)
+            {
+                 next = numberSequence[sequenceNumber++ % (numberSequence.Count)];
+            }
             return new TestIntegerEvaluableState(next);
         }
     }

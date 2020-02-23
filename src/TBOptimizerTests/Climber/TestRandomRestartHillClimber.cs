@@ -62,12 +62,12 @@ namespace OptimizerTests.Climber
 
             Dictionary<int, Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>> localWinners = new Dictionary<int, Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>>();
 
-            void OnClimberRestartEvent(object source, ClimberRestartResultEvent<TestIntegerEvaluableState, int> e)
+            void OnClimberRestartEvent(object source, ClimberCompleteEvent<TestIntegerEvaluableState, int> e)
             {
-                localWinners[e.RestartNumber] = new Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>(e.InitialState, e.OptimizedState);
+                localWinners[e.CLimberIndex] = new Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>(e.InitialState, e.OptimizedState);
             }
 
-            climber.RestartCompletedEvent += OnClimberRestartEvent;
+            climber.ClimberCompleteEvent += OnClimberRestartEvent;
 
             while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
             {

@@ -26,13 +26,24 @@ namespace TrailBlazer.TBOptimizer.Climber.Algorithm
         {
             TState bestSuccessor = generator.GetSuccessors(current).Extrema(comparer);
 
+            bool stateEncountered;
+
+            lock (encounteredStates)
+            {
+                stateEncountered = encounteredStates.Contains(bestSuccessor);
+            }
+
             if (comparer.Compare(current.GetEvaluation(), bestSuccessor.GetEvaluation()) <= 0 ||
-                encounteredStates.Contains(bestSuccessor))
+                stateEncountered)
             {
                 return current;
             }
 
-            encounteredStates.Add(bestSuccessor);
+            lock (encounteredStates)
+            {
+                encounteredStates.Add(bestSuccessor);
+            }
+
             return bestSuccessor;
         }
     }
