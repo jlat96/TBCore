@@ -27,21 +27,11 @@ namespace OptimizerTests.Climber.Algorithm
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(new MaximizingComparer<int>(), picker);
         }
 
-        [Test]
+        [Test, Timeout(5000)]
         public void TestOptimizeCorrectOptimalValueReached()
         {
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            Task<TestIntegerEvaluableState> task = Task.Run(() => algorithm.Optimize(initialState));
-
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-            while (!task.IsCompleted && timer.ElapsedMilliseconds < 5000)
-            {
-            }
-            timer.Stop();
-
-            Assert.IsTrue(task.IsCompleted, "Optimization took too long to complete");
-            TestIntegerEvaluableState result = task.Result;
+            TestIntegerEvaluableState result = algorithm.Optimize(initialState);
 
             Assert.AreEqual(100, result.Value);
 
@@ -56,21 +46,9 @@ namespace OptimizerTests.Climber.Algorithm
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
 
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => algorithm.Optimize(initialState));
 
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 10000)
-            {
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(optimizeTask.IsCompleted, "Optimization did not stop at local maxima");
-            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
-
-            TestIntegerEvaluableState result = optimizeTask.Result;
-            Assert.AreEqual(50, result.Value, "Encountered states do not match");
+            TestIntegerEvaluableState result = algorithm.Optimize(initialState);
+            Assert.AreEqual(50, result.Value, "Optimized state is incorrect");
         }
 
         [Test]
@@ -97,19 +75,7 @@ namespace OptimizerTests.Climber.Algorithm
             algorithm.ClimbStepPerformedEvent += OnEvent;
 
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => algorithm.Optimize(initialState));
-
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 10000)
-            {
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "FAILED");
-
-            TestIntegerEvaluableState result = optimizeTask.Result;
+            TestIntegerEvaluableState result = algorithm.Optimize(initialState);
 
             Assert.AreEqual(expectedStates.Count, encounteredStates.Count);
             for (int i = 0; i < expectedStates.Count; i++)
