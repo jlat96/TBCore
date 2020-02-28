@@ -7,9 +7,10 @@ namespace TBOptimizerTests.TestModels.State
 {
     public class TestExponentialIntegerSuccessorGenerator : ISuccessorGenerator<TestIntegerEvaluableState, int>
     {
-        private int initialValue;
         private int maxValue;
         private int runCount;
+
+        private static object lockObject = new object();
 
         public TestExponentialIntegerSuccessorGenerator()
         {
@@ -24,29 +25,34 @@ namespace TBOptimizerTests.TestModels.State
 
         public IEnumerable<TestIntegerEvaluableState> GetSuccessors(TestIntegerEvaluableState current)
         {
-            if (runCount++ == 0)
+            List<TestIntegerEvaluableState> neighbors = new List<TestIntegerEvaluableState>();
+            lock (lockObject)
             {
-                initialValue = current.Value;
-                try
+                if (runCount++ == 0)
                 {
-                    maxValue = Convert.ToInt32(Math.Pow(current.Value, 4));
+                    try
+                    {
+                        maxValue = Convert.ToInt32(Math.Pow(current.Value, 4));
+                    }
+                    catch (Exception)
+                    {
+                        maxValue = int.MaxValue;
+                    }
                 }
-                catch (Exception)
+
+
+                neighbors.Add(new TestIntegerEvaluableState(current.Value - 1));
+
+
+                if (current.Value < maxValue)
                 {
-                    maxValue = int.MaxValue;
+                    neighbors.Add(new TestIntegerEvaluableState(current.Value * current.Value));
+                }
+                else
+                {
+                    runCount = 0;
                 }
             }
-
-            List<TestIntegerEvaluableState> neighbors = new List<TestIntegerEvaluableState>()
-            {
-                new TestIntegerEvaluableState(current.Value - 1),
-            };
-
-            if (current.Value < maxValue)
-            {
-                neighbors.Add(new TestIntegerEvaluableState(current.Value * current.Value));
-            }
-
             return neighbors;
         }
     }

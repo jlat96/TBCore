@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.AssemblyInfo.cs" />
+    <Compile Remove="Climber\ParallelRandomRestartHillClimber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Optimizer\obj\Optimizer.csproj.nuget.g.targets" />

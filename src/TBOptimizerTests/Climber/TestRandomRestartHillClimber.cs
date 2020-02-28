@@ -48,7 +48,7 @@ namespace OptimizerTests.Climber
             randomizer = new TestIntegerRandomizerSimulator();
             climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
 
-            RunTest(climber, 1, 100);
+            RunTest(climber, 1, 10000);
         }
 
         private void RunTest(RandomRestartHillClimber<TestIntegerEvaluableState, int> climber, int initialStateValue, int expectedOptimalValue)
