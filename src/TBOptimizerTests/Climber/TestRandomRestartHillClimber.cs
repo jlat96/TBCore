@@ -38,7 +38,7 @@ namespace OptimizerTests.Climber
             RunTest(climber, 2, 100);
         }
 
-        [Test]
+        [Test, Timeout(20000)]
         public void TestRandomRestartHillClimberIncrementingRestartPoint()
         {
             comparer = new MaximizingComparer<int>();
@@ -56,9 +56,6 @@ namespace OptimizerTests.Climber
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(initialStateValue);
             TestIntegerEvaluableState resultState = new TestIntegerEvaluableState(initialStateValue);
 
-            Stopwatch timer = new Stopwatch();
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.Optimize(initialState));
-            timer.Start();
 
             Dictionary<int, Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>> localWinners = new Dictionary<int, Tuple<TestIntegerEvaluableState, TestIntegerEvaluableState>>();
 
@@ -69,16 +66,7 @@ namespace OptimizerTests.Climber
 
             climber.ClimberCompleteEvent += OnClimberRestartEvent;
 
-            while (!optimizeTask.IsCompleted && timer.ElapsedMilliseconds < 20000)
-            {
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(optimizeTask.IsCompleted, "Operation took too long to complete");
-            Assert.IsTrue(optimizeTask.IsCompletedSuccessfully, "Operation failed");
-
-            resultState = optimizeTask.Result;
+            resultState = climber.Optimize(initialState);
 
             Assert.AreEqual(expectedOptimalValue, resultState.Value);
         }

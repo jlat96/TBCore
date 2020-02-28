@@ -33,7 +33,7 @@ namespace OptimizerTests.Climber
             climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
         }
 
-        [Test]
+        [Test, Timeout(5000)]
         public void TestPerformOptimization()
         {
             TestIntegerEvaluableState initial = new TestIntegerEvaluableState(2);
@@ -53,21 +53,7 @@ namespace OptimizerTests.Climber
 
             climber.ClimberStepPerformedEvent += eventCallback;
 
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.Optimize(initial));
-
-            bool complete = false;
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
-            while (!complete && timer.ElapsedMilliseconds < 5000)
-            {
-                complete = optimizeTask.IsCompleted;
-            }
-
-            timer.Stop();
-            Assert.IsTrue(complete, "Optimization exceeded time limit");
-
-            result = optimizeTask.Result;
+            result = climber.Optimize(initial);
 
             Assert.AreEqual(100, result.Value);
             Assert.AreEqual(expectedStates.Count, states.Count);
@@ -78,7 +64,7 @@ namespace OptimizerTests.Climber
             }
         }
 
-        [Test]
+        [Test, Timeout(5000)]
         public void TestPerformOptimizationReturnsLocalExtrema()
         {
             TestIntegerEvaluableState initial = new TestIntegerEvaluableState(2);
@@ -89,21 +75,7 @@ namespace OptimizerTests.Climber
             algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
 
-            Task<TestIntegerEvaluableState> optimizeTask = Task.Run(() => climber.Optimize(initial));
-
-            bool complete = false;
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
-            while (!complete && timer.ElapsedMilliseconds < 5000)
-            {
-                complete = optimizeTask.IsCompleted;
-            }
-
-            timer.Stop();
-            Assert.IsTrue(complete, "Optimization did not stop at local extraema");
-
-            result = optimizeTask.Result;
+            result = climber.Optimize(initial);
 
             Assert.AreEqual(50, result.Value);
         }
