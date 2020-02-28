@@ -1,16 +1,16 @@
 ﻿using System;
 namespace TBOptimizer.Climber.Events
 {
-    public class ClimberRestartResultEvent<TState, TEvaluation> : EventArgs
+    public class ClimberCompleteEvent<TState, TEvaluation> : EventArgs
     {
-        public int RestartNumber { get; set; }
+        public int CLimberIndex { get; set; }
         public int TotalStepsPerformed { get; set; }
         public TState InitialState { get; set; }
         public TState OptimizedState { get; set; }
 
         public override string ToString()
         {
-            return $"Restart: {RestartNumber}, Steps Completed: {TotalStepsPerformed}\nOptimized State:\n{OptimizedState.ToString()}";
+            return $"Climber: {CLimberIndex}, Steps Completed: {TotalStepsPerformed}\nOptimized State:\n{OptimizedState.ToString()}";
         }
     }
 }

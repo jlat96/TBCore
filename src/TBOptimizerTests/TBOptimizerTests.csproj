@@ -17,5 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Comparison\TestGenericComparison.cs" />
+    <Compile Remove="Climber\TestParallelRandomRestartHillClimber.cs" />
   </ItemGroup>
 </Project>

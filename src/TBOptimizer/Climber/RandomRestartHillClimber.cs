@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TBOptimizer.Climber;
 using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
 using TrailBlazer.TBOptimizer.State;
@@ -9,13 +10,11 @@ using TrailBlazer.TBOptimizer.State;
 namespace TrailBlazer.TBOptimizer.Climber
 {
     /// <summary>
-    /// RandomRestartHillClimber is a HillClimber optimizer that runs a Climber operation many times. If the
-    /// climber is setup to be parallel options are given, the individual climber operations will attempt to
-    /// be completed in parallel.
+    /// RandomRestartHillClimber is a HillClimber optimizer that runs a Climber operation many times.
     /// </summary>
     /// <typeparam name="TState">The type of the EvaluableState that is being evaluated</typeparam>
     /// <typeparam name="TEvaluation">The type of the Comparable result of an evaluation</typeparam>
-    public class RandomRestartHillClimber<TState, TEvaluation> : HillClimber<TState, TEvaluation>
+    public class RandomRestartHillClimber<TState, TEvaluation> : IterableHillClimber<TState, TEvaluation>
         where TState : EvaluableState<TState,TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
@@ -49,7 +48,7 @@ namespace TrailBlazer.TBOptimizer.Climber
             this.stateRandomizer = stateRandomizer;
         }
 
-        public EventHandler<ClimberRestartResultEvent<TState, TEvaluation>> RestartCompletedEvent;
+        public EventHandler<ClimberCompleteEvent<TState, TEvaluation>> ClimberCompleteEvent { get; set; }
 
         /// <summary>
         /// Performs a monte carlo random restart hill climbing operation in parallel up to numRestarts. If parallel
@@ -59,25 +58,27 @@ namespace TrailBlazer.TBOptimizer.Climber
         /// <returns>The most optimal encountered state from the restarted operation</returns>
         public override TState Optimize(TState initialState)
         {
-            List<TState> winnerStates = new List<TState>();
+            TState winnerState = initialState;
             for (int i = 0; i < numRestarts; i++)
             { 
                 TState nextRestart = stateRandomizer.Next(initialState);
                 TState localWinner = base.Optimize(nextRestart);
-                lock (winnerStates)
+   
+                if (localWinner > winnerState)
                 {
-                    winnerStates.Add(localWinner);
+                    winnerState = localWinner;
                 }
+
                 EmitRestartCompletion(i, 0, nextRestart, localWinner);
             }
-            return winnerStates.OrderByDescending(s => s.GetEvaluation()).First();
+            return winnerState;
         }
 
         private void EmitRestartCompletion(int restartNumber, int totalSteps, TState initialState, TState optimizedState)
         {
-            RestartCompletedEvent?.Invoke(this, new ClimberRestartResultEvent<TState, TEvaluation>()
+            ClimberCompleteEvent?.Invoke(this, new ClimberCompleteEvent<TState, TEvaluation>()
             {
-                RestartNumber = restartNumber,
+                CLimberIndex = restartNumber,
                 TotalStepsPerformed = totalSteps,
                 InitialState = initialState,
                 OptimizedState = optimizedState,
