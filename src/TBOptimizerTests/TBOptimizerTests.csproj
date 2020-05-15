@@ -19,4 +19,7 @@
     <Compile Remove="Comparison\TestGenericComparison.cs" />
     <Compile Remove="Climber\TestParallelRandomRestartHillClimber.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Randomizer\" />
+  </ItemGroup>
 </Project>

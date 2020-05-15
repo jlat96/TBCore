@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using TBUtils.Timing;
 using TrailBlazer.TBOptimizer;
 using TrailBlazer.TBOptimizer.State;
 
-namespace Trailblazer.TBOptimizer.Randomizer
+namespace Trailblazer.TBOptimizer.Randomization
 {
-    public class StateRandomizer<TState, TEvaluation> : Optimizer<TState, TEvaluation>
+    public class MonteCarloRandomizer<TState, TEvaluation> : Optimizer<TState, TEvaluation>
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
+        public static readonly int UNLIMITED_RANDOMIZATIONS = -1;
 
         /// <summary>
         /// Create a new StateRandomizer with the given compaer, using the given SuccessorPicker that will perform
@@ -16,18 +18,18 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// </summary>
         /// <param name="evaluationComparer"></param>
         /// <param name="successorPicker"></param>
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker)
+        public MonteCarloRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker)
             : this(evaluationComparer, successorPicker, 1) { }
 
         /// <summary>
         /// Create a new StateRandomizer with the given compaer, using the given SuccessorPicker that will perform
-        /// the given number of randomizations before returning a result. A numRanfomizations of -1 will have the optimier
+        /// the given number of randomizations before returning a result. A numRandomizations value of -1 will have the optimizer
         /// return the first encountered optimal state
         /// </summary>
         /// <param name="evaluationComparer"></param>
         /// <param name="successorPicker"></param>
         /// <param name="numRandomizations"></param>
-        public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker, int numRandomizations)
+        public MonteCarloRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker, int numRandomizations)
             : base (successorPicker)
         {
             EvaluationComparer = evaluationComparer;
@@ -44,6 +46,10 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// </summary>
         internal int NumRandomizations { get; set; } = 1;
 
+        internal int TimeoutMilleseconds { get; set; } = 1;
+
+        public TimeoutStrategy Timeout { get; set; } = new InfiniteTimeoutStrategy();
+
         /// <summary>
         /// Performs a Monte Carlo optimization on the given initial state.
         /// </summary>
@@ -56,14 +62,25 @@ namespace Trailblazer.TBOptimizer.Randomizer
                 throw new ArgumentException("Initial state cannot be null");
             }
 
+            Timeout.Start();
+
             TState bestState = initialState;
             TState nextState;
-            for (int i = 0; i < NumRandomizations && bestState > initialState; i++) // Test this
+            for (int i = 0; i < NumRandomizations ^ i != -1; i++)
             {
+                if (Timeout.IsTimedOut())
+                {
+                    return bestState;
+                }
                 nextState = successorPicker.Next(bestState);
-                bestState = EvaluationComparer.Compare(bestState.GetEvaluation(), nextState.GetEvaluation()) > 0
+                bestState = EvaluationComparer.Compare(nextState.GetEvaluation(), bestState.GetEvaluation()) > 0
                     ? bestState
                     : nextState;
+
+                if (NumRandomizations == UNLIMITED_RANDOMIZATIONS && EvaluationComparer.Compare(bestState.GetEvaluation(), initialState.GetEvaluation()) < 0)
+                {
+                    return bestState;
+                }
             }
 
             return bestState;

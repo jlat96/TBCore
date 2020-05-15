@@ -63,5 +63,15 @@ namespace TrailBlazer.TBOptimizer.State
         {
             return left.GetEvaluation().CompareTo(right.GetEvaluation()) > 0;
         }
+
+        public static bool operator <=(EvaluableState<TState, TEvaluation> left, EvaluableState<TState, TEvaluation> right)
+        {
+            return left.GetEvaluation().CompareTo(right.GetEvaluation()) <= 0;
+        }
+
+        public static bool operator >=(EvaluableState<TState, TEvaluation> left, EvaluableState<TState, TEvaluation> right)
+        {
+            return left.GetEvaluation().CompareTo(right.GetEvaluation()) >= 0;
+        }
     }
 }
