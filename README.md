@@ -8,11 +8,11 @@
 
 |Release|Version|
 |-------|-------|
-|Pre-release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
+|Release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
 
 ## Introduction
 
-TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful and expandable suite of path finding tools to easily implement path finding and local search into applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope and scale can make use of efficient tools without each project requiring a complex independent implementation.
+TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful and expandable suite of path finding tools to easily implement path finding and local search into applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope can make use of efficient tools without each project requiring a complex independent implementation.
 
 ## Getting Started
 
