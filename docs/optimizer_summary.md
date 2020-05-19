@@ -1,4 +1,4 @@
-Optimizer aims to provide tools to maximize or minimize configurations of states using algoritms like Hill Climbing and Monte Carlo evaluation.
+Optimizer aims to provide tools to maximize or minimize configurations of states using algoritms like Hill Climbing
 
 ## Climber
 
