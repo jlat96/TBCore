@@ -115,6 +115,9 @@ Optimizer aims to provide tools to maximize or minimize configurations of states
   4. Choose a HillClimber from the included climbers or create your own implementation of ```HillClimber```.
   5. Initialize the selected HillClimber with the ```ClimberAlgorithm``` created in step 3
   
+  
+  1. Create a HillClimber using ```ClimberConfiguration```. ```The default ClimberConfiguration``` create a ```HillClimber``` that will climb using the default ClimberAlgorithm.
+  
   ```cs
   // using a successor function
   var climberConfig = new ClimberConfiguration<AddativeMatrixState, int>()
