@@ -11,7 +11,7 @@
 
 |Release|Version|
 |-------|-------|
-|Release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
+|Release|[![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)](https://github.com/jlat96/TBCore/releases)|
 
 ## Introduction
 
@@ -23,7 +23,7 @@ Download libraries using NuGet for .NET Core or download the TrailBlazer source 
 
 |Project  |Download                                  |
 |---------|------------------------------------------|
-|Source   |https://github.com/jlat96/TBCore/releases |
+|Source   |[![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)](https://github.com/jlat96/TBCore/releases)|
 |NuGet    |[![Nuget](https://img.shields.io/nuget/v/TBOptimizer)](https://www.nuget.org/packages/TBOptimizer/#)|
 
 ## License
