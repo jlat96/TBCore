@@ -8,8 +8,8 @@ namespace OptimizerTests.TestModels.State
     public class TestLinearIntegerSuccessorGenerator : ISuccessorGenerator<TestIntegerEvaluableState, int>
     {
 
-        private int incrementStep;
-        private int maxValue;
+        private readonly int incrementStep;
+        private readonly int maxValue;
 
         public TestLinearIntegerSuccessorGenerator() : this(1) { }
 

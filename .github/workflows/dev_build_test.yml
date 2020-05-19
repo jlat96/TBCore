@@ -11,6 +11,7 @@ jobs:
     defaults:
       run:
         working-directory: src
+    
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core

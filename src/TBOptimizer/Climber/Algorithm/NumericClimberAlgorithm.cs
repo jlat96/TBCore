@@ -18,18 +18,8 @@ namespace TBOptimizer.Climber.Algorithm
         /// discrete evaluations and the given successorPicker to select the next EvaluableState to
         /// evaluate against non-greedily
         /// </summary>
-        /// <param name="comparer">The Comparer that which Optimize will use to determine optimality</param>
         /// <param name="successorPicker">The successor picker to choose the next EvaluableState in to evaluate at an optimization step</param>
-        public NumericClimberAlgorithm(IComparer<int> comparer, ISuccessorPicker<TState, int> successorPicker) : base(comparer, successorPicker) { }
-
-        /// <summary>
-        /// Creates a new LocalClimberAlgorithm using the given comparison strategy to compare
-        /// discrete evaluations and the given successorPicker to select the next EvaluableState to
-        /// evaluate against in a greedy or non-greedy configuration
-        /// </summary>
-        /// <param name="greedy">Determines the greediness of the algorithm</param>
-        /// <param name="comperer">The Comparer that which Optimize will use to compare optimizations</param>
-        /// <param name="successorPicker">The successor picker to choose the next EvaluableState in to evaluate at an optimization step</param>
-        public NumericClimberAlgorithm(bool greedy, IComparer<int> comperer, ISuccessorPicker<TState, int> successorPicker) : base(greedy, comperer, successorPicker) { }
+        /// 
+        public NumericClimberAlgorithm(ISuccessorSelector<TState, int> successorPicker) : base(successorPicker) { }
     }
 }

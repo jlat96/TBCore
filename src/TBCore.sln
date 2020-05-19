@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBUtils", "TBUtils\TBUtils.csproj", "{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\TBOptimizer.csproj", "{420C0A6C-D6C4-4807-9A29-05EDE74B1251}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraph", "TBGraph\TBGraph.csproj", "{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGraphTest", "TBGraphTest\TBGraphTest.csproj", "{ADD58967-8745-436C-B6B7-BCC2FFE3E327}"
@@ -12,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizerTests", "TBOptimizerTests\TBOptimizerTests.csproj", "{EF415261-0D17-4220-A7CF-4A41BB9BAFB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer_CLI_Demo", "TBOptimizer_CLI_Demo\TBOptimizer_CLI_Demo.csproj", "{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOptimizer", "TBOptimizer\TBOptimizer.csproj", "{F42B5BC3-A0CE-4337-862C-F87795C067CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{38EE7A77-17A8-49DB-A2BE-481DB2D01A89}.Release|anycpu.Build.0 = Release|Any CPU
-		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Debug|anycpu.ActiveCfg = Debug|Any CPU
-		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Debug|anycpu.Build.0 = Debug|Any CPU
-		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.ActiveCfg = Release|Any CPU
-		{420C0A6C-D6C4-4807-9A29-05EDE74B1251}.Release|anycpu.Build.0 = Release|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.ActiveCfg = Debug|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{9AB1962E-4BF4-48E7-965F-DB10D98BF7A5}.Release|anycpu.ActiveCfg = Release|Any CPU
@@ -43,5 +39,21 @@ Global
 		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{632ADD40-AEF6-4BFF-BAA6-41DC0A6187D6}.Release|anycpu.Build.0 = Release|Any CPU
+		{F42B5BC3-A0CE-4337-862C-F87795C067CF}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{F42B5BC3-A0CE-4337-862C-F87795C067CF}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{F42B5BC3-A0CE-4337-862C-F87795C067CF}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{F42B5BC3-A0CE-4337-862C-F87795C067CF}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 140
+		$3.TabsToSpaces = True
+		$3.scope = text/plain
 	EndGlobalSection
 EndGlobal

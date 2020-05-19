@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>TrailBlazer.TBOptimizer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="Optimizer\obj\Debug\netcoreapp3.0\Optimizer.AssemblyInfo.cs" />
+    <Compile Remove="Climber\ParallelRandomRestartHillClimber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Optimizer\obj\Optimizer.csproj.nuget.g.targets" />
@@ -33,6 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Climber\Events\" />
-    <Folder Include="Setup\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

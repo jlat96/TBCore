@@ -1,25 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using OptimizerTests.TestModels.Evaluable;
-using TBOptimizer.State;
 using TrailBlazer.TBOptimizer.State;
 
 namespace OptimizerTests.TestModels.State
 {
-    public class TestIntegerRandomizerSimulator : ISuccessorPicker<TestIntegerEvaluableState, int>
+    public class TestIntegerRandomizerSimulator : ISuccessorSelector<TestIntegerEvaluableState, int>
     {
-        private readonly List<int> numberSequence;
-        private int sequenceNumber;
+        private readonly ConcurrentQueue<int> numberSequence;
 
         public TestIntegerRandomizerSimulator()
         {
-            numberSequence = new List<int>() { 2, 4, 6, 8, 10 };
-            sequenceNumber = 0;
+            numberSequence = new ConcurrentQueue<int>();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            for (int i = 2; i <= 10; i += 2)
+            {
+                numberSequence.Enqueue(i);
+            }
         }
 
         public TestIntegerEvaluableState Next(TestIntegerEvaluableState current)
         {
-            int next = numberSequence[sequenceNumber++ % (numberSequence.Count - 1)];
+            int next;
+            while (!numberSequence.TryDequeue(out next))
+            {
+                if (numberSequence.Count < 1)
+                {
+                    Initialize();
+                }
+            }
+
             return new TestIntegerEvaluableState(next);
         }
     }
