@@ -1,0 +1,27 @@
+name: Release Preview
+
+on:
+  release:
+    types: [prereleased]    
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet pack --configuration Release --no-restore -o out /p:Version=${{ github.event.release.tag_name }}-preview
+    - name: Publish NuGet Preview
+      run: |
+        dotnet nuget push *.nupkg -k ${{ TB_NUGET_API }} -s https://api.nuget.org/v3/index.json
