@@ -24,7 +24,7 @@ Download libraries using NuGet for .NET Core or download the TrailBlazer source 
 |Project  |Download                                  |
 |---------|------------------------------------------|
 |Source   |https://github.com/jlat96/TBCore/releases |
-|NuGet    |https://img.shields.io/nuget/v/TBOptimizer|
+|NuGet    |![Nuget](https://img.shields.io/nuget/v/TBOptimizer)|
 
 ## License
 
