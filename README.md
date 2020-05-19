@@ -2,9 +2,9 @@
 
 ## Status
 
-![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
-![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
 
+![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
 ![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)
 
 ## Releases
