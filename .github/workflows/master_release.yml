@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: src
+        working-directory: src/TBOptimizer
 
     steps:
     - uses: actions/checkout@v2
@@ -24,4 +24,4 @@ jobs:
       run: dotnet pack --configuration Release --no-restore -o out /p:Version=${{ github.event.release.tag_name }}
     - name: Publish NuGet Preview
       run: |
-        dotnet nuget push *.nupkg -k ${{ secrets.TB_NUGET_API }} -s https://api.nuget.org/v3/index.json
+        dotnet nuget push out/*.nupkg -k ${{ secrets.TB_NUGET_API }} -s https://api.nuget.org/v3/index.json
