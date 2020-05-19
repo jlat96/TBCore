@@ -105,7 +105,5 @@ The successor picker will store each selected state and will try to save time wh
 
 ## ClimberAlgorithm
 
-The ClimberAlgorithm uses the comparison strategy, and successor generator to incrementally optimize against the next most optimal neighbor state until no more optimal state can be reached at a local maximum or minimum.
-
-## Hill Climber
+The ClimberAlgorithm uses the comparison strategy, and successor generator in concert to incrementally optimize against the next most optimal neighbor state until no more optimal state can be reached at a local maximum or minimum.
 
