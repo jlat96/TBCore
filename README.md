@@ -7,6 +7,11 @@
 ![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
 ![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)
 
+|Development|Preview|Release|
+|-|-|-|
+|||![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)|
+|||![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)|
+
 ## Releases
 
 |Release|Version|
