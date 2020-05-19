@@ -2,17 +2,20 @@
 
 ## Status
 
-[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg&circle-token=a7d863cfb0fe6c6023a12dbf4aa8eca916c52f3b)](https://circleci.com/gh/jlat96/TBCore/tree/master) ![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+
+![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
+![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)
 
 ## Releases
 
 |Release|Version|
 |-------|-------|
-|Pre-release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
+|Release|![GH_Pre-Release](https://img.shields.io/github/v/release/jlat96/TBCore?include_prereleases)|
 
 ## Introduction
 
-TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful and expandable suite of path finding tools to easily implement path finding and local search into applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope and scale can make use of efficient tools without each project requiring a complex independent implementation.
+TrailBlazer is a path finding and artificial intelligence library for .NET. Our goal is to provide users with a simple, powerful and expandable suite of path finding tools to easily implement path finding and local search into applications. The core foundation of TrailBlazer is a generic framework so that applications of any scope can make use of efficient tools without each project requiring a complex independent implementation.
 
 ## Getting Started
 
