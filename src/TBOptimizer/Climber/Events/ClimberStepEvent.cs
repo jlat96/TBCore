@@ -3,6 +3,11 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace TBOptimizer.Climber.Events
 {
+    /// <summary>
+    /// Represents a step in a Climber Optimization operation.
+    /// </summary>
+    /// <typeparam name="TState"></typeparam>
+    /// <typeparam name="TEvaluation"></typeparam>
     public class ClimberStepEvent<TState, TEvaluation> : EventArgs
         where TState : IEvaluable<TEvaluation>
         where TEvaluation : IComparable<TEvaluation>

@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using OptimizerTests.TestModels.Evaluable;
 using OptimizerTests.TestModels.State;
-using OptimizerTests.TestModels.State;
+using TBOptimizer.Climber;
 using TBOptimizer.Climber.Events;
 using TrailBlazer.TBOptimizer.Climber;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
 using TrailBlazer.TBOptimizer.Comparison;
+using TrailBlazer.TBOptimizer.Configuration;
 using TrailBlazer.TBOptimizer.State;
 
 namespace OptimizerTests.Climber
@@ -21,16 +22,17 @@ namespace OptimizerTests.Climber
         private ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
         private ClimberSuccessorSelector<TestIntegerEvaluableState, int> picker;
         private LocalClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
-        private GeneralHillClimber<TestIntegerEvaluableState> climber;
+        private IHillClimber<TestIntegerEvaluableState, int> climber;
 
         [SetUp]
         public void Setup()
         {
             comparer = new MaximizingComparer<int>();
-            generator = new TestLinearIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
-            climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
+            generator = generator = new TestLinearIntegerSuccessorGenerator();
+            climber = new ClimberConfiguration<TestIntegerEvaluableState, int>()
+                .ComparesUsing(new MaximizingComparer<int>())
+                .GeneratesSuccessorsWith(generator)
+                .Build();
         }
 
         [Test, Timeout(5000)]
@@ -72,8 +74,11 @@ namespace OptimizerTests.Climber
 
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
             picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
-            climber = new GeneralHillClimber<TestIntegerEvaluableState>(algorithm);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(picker);
+            climber = new ClimberConfiguration<TestIntegerEvaluableState, int>()
+                .ComparesUsing(comparer)
+                .GeneratesSuccessorsWith(generator)
+                .Build();
 
             result = climber.Optimize(initial);
 
