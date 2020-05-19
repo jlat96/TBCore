@@ -3,7 +3,7 @@
 ## Status
 
 
-![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+[![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)](https://github.com/jlat96/TBCore/issues)
 ![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
 ![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)
 
@@ -24,7 +24,7 @@ Download libraries using NuGet for .NET Core or download the TrailBlazer source 
 |Project  |Download                                  |
 |---------|------------------------------------------|
 |Source   |https://github.com/jlat96/TBCore/releases |
-|NuGet    |![Nuget](https://img.shields.io/nuget/v/TBOptimizer)|
+|NuGet    |[![Nuget](https://img.shields.io/nuget/v/TBOptimizer)](https://www.nuget.org/packages/TBOptimizer/#)|
 
 ## License
 
