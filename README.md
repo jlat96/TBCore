@@ -2,7 +2,10 @@
 
 ## Status
 
-[![CircleCI](https://circleci.com/gh/jlat96/TBCore/tree/master.svg?style=svg&circle-token=a7d863cfb0fe6c6023a12dbf4aa8eca916c52f3b)](https://circleci.com/gh/jlat96/TBCore/tree/master) ![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+![Master](https://github.com/jlat96/TBCore/workflows/Build%20and%20Test%20Master/badge.svg)
+![GithubIssues](https://img.shields.io/github/issues/jlat96/TBCore)
+
+![NuGet Deployment](https://github.com/jlat96/TBCore/workflows/Build%20and%20Release%20Master/badge.svg)
 
 ## Releases
 
