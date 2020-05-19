@@ -108,15 +108,9 @@ Optimizer aims to provide tools to maximize or minimize configurations of states
   }
   ```
 
-* Set up a Climber
-  1. Choose a ClimberAlgorithm from the included algorithms or create your own implementation of ```ClimberAlgorithm```.
-  2. Choose an ```IComparer``` as a comparison strategy. This will determine if the climber is ascending or descending.
-  3. Initialize the selected ClimberAlgorithm with the seleted comparer and successor picker. Optionally, you can initialize the algorithm to perform a ```greedy``` (First Search) evaluation.
-  4. Choose a HillClimber from the included climbers or create your own implementation of ```HillClimber```.
-  5. Initialize the selected HillClimber with the ```ClimberAlgorithm``` created in step 3
+* Set up a Climber  
+  1. Create a HillClimber using ```ClimberConfiguration```. ```ClimberConfiguration``` creates a ```HillClimber``` that will climb using the default ```ClimberAlgorithm```.
   
-  
-  1. Create a HillClimber using ```ClimberConfiguration```. ```The default ClimberConfiguration``` create a ```HillClimber``` that will climb using the default ClimberAlgorithm.
   
   ```cs
   // using a successor function
