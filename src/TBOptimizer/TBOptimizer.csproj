@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>TrailBlazer.TBOptimizer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Climber\Events\" />
-    <Folder Include="Setup\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

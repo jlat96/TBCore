@@ -12,25 +12,18 @@ namespace TBOptimizer.Climber
     /// </summary>
     /// <typeparam name="TState"></typeparam>
     /// <typeparam name="TEvaluation"></typeparam>
-    public abstract class IterableHillClimber<TState, TEvaluation> : HillClimber<TState, TEvaluation>, IIterableClimber<TState, TEvaluation>
+    public abstract class IterableHillClimber<TState, TEvaluation> : IHillClimber<TState, TEvaluation>, IIterableClimber<TState, TEvaluation>
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
         /// <summary>
-        /// Creates a IterableHillClimber that will optimize using the given comparer and successor generator
+        /// Raises an event whenever a climber optimization is completed
         /// </summary>
-        /// <param name="comparer">The comparison strategy to optimize with</param>
-        /// <param name="successorGenerator">The successor genereator from which the best state will be selected</param>
-        public IterableHillClimber(IComparer<TEvaluation> comparer, ISuccessorGenerator<TState, TEvaluation> successorGenerator)
-            : base(comparer, successorGenerator) { }
-
-
-        /// <summary>
-        /// Creates a IterableHillClimber that will perform an optimization from the given ClimberAlgrithm.
-        /// </summary>
-        /// <param name="algorithm">The climber algorithm to use for optimzation</param>
-        public IterableHillClimber(ClimberAlgorithm<TState, TEvaluation> algorithm) : base(algorithm) { }
-
         public EventHandler<ClimberCompleteEvent<TState, TEvaluation>> ClimberCompleteEvent { get; set; }
+
+        /// <inheritdoc/>
+        public EventHandler<ClimberStepEvent<TState, TEvaluation>> ClimberStepPerformedEvent { get; set; }
+
+        public abstract TState Optimize(TState initialState);
     }
 }

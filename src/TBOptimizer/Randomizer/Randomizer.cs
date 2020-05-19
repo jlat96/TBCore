@@ -5,11 +5,16 @@ using TrailBlazer.TBOptimizer.State;
 
 namespace Trailblazer.TBOptimizer.Randomizer
 {
+    /// <summary>
+    /// Represents a monte-carlo state randomizer that will ingest an initial state and continually generate randomized
+    /// states.
+    /// </summary>
+    /// <typeparam name="TState"></typeparam>
+    /// <typeparam name="TEvaluation"></typeparam>
     public class StateRandomizer<TState, TEvaluation> : Optimizer<TState, TEvaluation>
         where TState : EvaluableState<TState, TEvaluation>
         where TEvaluation : IComparable<TEvaluation>
     {
-
         /// <summary>
         /// Create a new StateRandomizer with the given compaer, using the given SuccessorPicker that will perform
         /// a single randomization and return the most optimal result
@@ -28,8 +33,8 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// <param name="successorPicker"></param>
         /// <param name="numRandomizations"></param>
         public StateRandomizer(IComparer<TEvaluation> evaluationComparer, ISuccessorSelector<TState, TEvaluation> successorPicker, int numRandomizations)
-            : base (successorPicker)
         {
+            SuccessorPicker = successorPicker;
             EvaluationComparer = evaluationComparer;
             NumRandomizations = numRandomizations;
         }
@@ -43,6 +48,8 @@ namespace Trailblazer.TBOptimizer.Randomizer
         /// The number of times that the optimizer will attempt to find a more optimal state.
         /// </summary>
         internal int NumRandomizations { get; set; } = 1;
+
+        internal ISuccessorSelector<TState, TEvaluation> SuccessorPicker { get; set; }
 
         /// <summary>
         /// Performs a Monte Carlo optimization on the given initial state.
@@ -60,7 +67,7 @@ namespace Trailblazer.TBOptimizer.Randomizer
             TState nextState;
             for (int i = 0; i < NumRandomizations && bestState > initialState; i++) // Test this
             {
-                nextState = successorPicker.Next(bestState);
+                nextState = SuccessorPicker.Next(bestState);
                 bestState = EvaluationComparer.Compare(bestState.GetEvaluation(), nextState.GetEvaluation()) > 0
                     ? bestState
                     : nextState;

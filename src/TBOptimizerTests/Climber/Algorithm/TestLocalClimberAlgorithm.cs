@@ -24,7 +24,7 @@ namespace OptimizerTests.Climber.Algorithm
         {
             generator = new TestLinearIntegerSuccessorGenerator();
             picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, new MaximizingComparer<int>());
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(new MaximizingComparer<int>(), picker);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(picker);
         }
 
         [Test, Timeout(5000)]
@@ -43,7 +43,7 @@ namespace OptimizerTests.Climber.Algorithm
             IComparer<int> comparer = new MaximizingComparer<int>();
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
             picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(picker);
 
             TestIntegerEvaluableState initialState = new TestIntegerEvaluableState(2);
 
@@ -57,7 +57,7 @@ namespace OptimizerTests.Climber.Algorithm
             IComparer<int> comparer = new MaximizingComparer<int>();
             generator = new TestIntegerLocalMaximaSuccessorGenerator();
             picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
+            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(picker);
 
             List<int> encounteredStates = new List<int>();
             List<int> expectedStates = new List<int>();

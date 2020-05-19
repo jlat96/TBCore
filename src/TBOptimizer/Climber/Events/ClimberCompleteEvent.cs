@@ -1,6 +1,11 @@
 ﻿using System;
 namespace TBOptimizer.Climber.Events
 {
+    /// <summary>
+    /// Represents the completion state of a climber operation
+    /// </summary>
+    /// <typeparam name="TState"></typeparam>
+    /// <typeparam name="TEvaluation"></typeparam>
     public class ClimberCompleteEvent<TState, TEvaluation> : EventArgs
     {
         public int CLimberIndex { get; set; }

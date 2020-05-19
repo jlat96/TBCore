@@ -7,10 +7,10 @@ using OptimizerTests.TestModels.Evaluable;
 using OptimizerTests.TestModels.State;
 using TBOptimizer.Climber.Events;
 using TBOptimizerTests.TestModels.State;
-using TrailBlazer.TBOptimizer;
 using TrailBlazer.TBOptimizer.Climber;
 using TrailBlazer.TBOptimizer.Climber.Algorithm;
 using TrailBlazer.TBOptimizer.Comparison;
+using TrailBlazer.TBOptimizer.Configuration;
 using TrailBlazer.TBOptimizer.State;
 
 namespace OptimizerTests.Climber
@@ -20,8 +20,6 @@ namespace OptimizerTests.Climber
     {
         private IComparer<int> comparer;
         private ISuccessorGenerator<TestIntegerEvaluableState, int> generator;
-        private ClimberSuccessorSelector<TestIntegerEvaluableState, int> picker;
-        private LocalClimberAlgorithm<TestIntegerEvaluableState, int> algorithm;
         private RandomRestartHillClimber<TestIntegerEvaluableState, int> climber;
         private ISuccessorSelector<TestIntegerEvaluableState, int> randomizer;
 
@@ -30,10 +28,14 @@ namespace OptimizerTests.Climber
         {
             comparer = new MaximizingComparer<int>();
             generator = new TestLinearIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
             randomizer = new TestIntegerEvaluableStateNonRandomizer();
-            climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
+
+            var climberConfiguration = new ClimberConfiguration<TestIntegerEvaluableState, int>()
+                .ComparesUsing(comparer)
+                .GeneratesSuccessorsWith((c) => generator.GetSuccessors(c));
+
+            randomizer = new TestIntegerEvaluableStateNonRandomizer();
+            climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(5, randomizer, climberConfiguration);
 
             RunTest(climber, 2, 100);
         }
@@ -43,10 +45,13 @@ namespace OptimizerTests.Climber
         {
             comparer = new MaximizingComparer<int>();
             generator = new TestExponentialIntegerSuccessorGenerator();
-            picker = new ClimberSuccessorSelector<TestIntegerEvaluableState, int>(generator, comparer);
-            algorithm = new LocalClimberAlgorithm<TestIntegerEvaluableState, int>(comparer, picker);
+
+            var climberConfiguration = new ClimberConfiguration<TestIntegerEvaluableState, int>()
+                .ComparesUsing(comparer)
+                .GeneratesSuccessorsWith((c) => generator.GetSuccessors(c));
+
             randomizer = new TestIntegerRandomizerSimulator();
-            climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(randomizer, algorithm, 5);
+            climber = new RandomRestartHillClimber<TestIntegerEvaluableState, int>(5, randomizer, climberConfiguration);
 
             RunTest(climber, 1, 10000);
         }
